@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/nombre/{name}/apellido/{lastname?}', function ($name, $lastname = '[REDACTED]') {
+    return 'Hola '.$name. ' ' .$lastname.'!, ¿Como estas?';
+});
+
+
+Route::get('/miHolaMundo', function () {
+    return 'Hola Mundo, desde Laravel!';
+});
+
+
+Route::Resource('estado', 'EstadoController');
