@@ -25,6 +25,7 @@ class LenguajeController extends Controller
     public function create()
     {
         //
+        return view('lenguaje.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class LenguajeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
+        $lenguaje = new Lenguaje();
+
+        $lenguaje->nombre = $request->input('nombre'); 
+        $lenguaje->descripcion = $request->input('descripcion'); 
++*/
+        return 'Dato guardado!';
     }
 
     /**
