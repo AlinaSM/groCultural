@@ -22,16 +22,16 @@ class CreateSitioInteresHasImagensTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->integer('is_interes_cult');
-            $table->integer('id_imagen');
+            $table->integer('id_interes_cult')->unsigned();
+            $table->integer('id_imagen')->unsigned();
             $table->timestamps();
 
             $table->index(["id_imagen"], 'fk_intereses_culturales_has_imagenes_imagenes1_idx');
 
-            $table->index(["is_interes_cult"], 'fk_intereses_culturales_has_imagenes_intereses_culturales1_idx');
+            $table->index(["id_interes_cult"], 'fk_intereses_culturales_has_imagenes_intereses_culturales1_idx');
 
 
-            $table->foreign('is_interes_cult', 'fk_intereses_culturales_has_imagenes_intereses_culturales1_idx')
+            $table->foreign('id_interes_cult', 'fk_intereses_culturales_has_imagenes_intereses_culturales1_idx')
                 ->references('id_interes_cult')->on('intereses_culturales')
                 ->onDelete('no action')
                 ->onUpdate('no action');
