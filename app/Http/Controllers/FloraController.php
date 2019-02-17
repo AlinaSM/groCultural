@@ -14,6 +14,7 @@ class FloraController extends Controller
     public function index()
     {
         //
+        return view('flora.index');
     }
 
     /**

@@ -14,6 +14,7 @@ class TradicionController extends Controller
     public function index()
     {
         //
+        return view('tradicion.index');
     }
 
     /**

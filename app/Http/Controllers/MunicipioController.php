@@ -14,6 +14,7 @@ class MunicipioController extends Controller
     public function index()
     {
         //
+        return view('municipio.index');
     }
 
     /**

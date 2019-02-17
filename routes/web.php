@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/nombre/{name}/apellido/{lastname?}', function ($name, $lastname = '[REDACTED]') {
@@ -20,9 +20,15 @@ Route::get('/nombre/{name}/apellido/{lastname?}', function ($name, $lastname = '
 });
 
 
-Route::get('/miHolaMundo', function () {
-    return 'Hola Mundo, desde Laravel!';
-});
 
-
-Route::Resource('estado', 'EstadoController');
+Route::resources([
+    'estado' => 'EstadoController',
+    'fauna' => 'FaunaController',
+    'flora' => 'FloraController',
+    'lenguajes' => 'LenguajeController',
+    'municipios' => 'MunicipioController',
+    'regiones' => 'RegionController',
+    'religiones' => 'ReligionController',
+    'sitios' => 'SitioInteresController',
+    'tradiciones' => 'TradicionController'
+]);

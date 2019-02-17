@@ -14,6 +14,7 @@ class RegionController extends Controller
     public function index()
     {
         //
+        return view('region.index');
     }
 
     /**
@@ -46,6 +47,7 @@ class RegionController extends Controller
     public function show($id)
     {
         //
+        return view('region.index');
     }
 
     /**

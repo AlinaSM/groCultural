@@ -14,6 +14,7 @@ class ReligionController extends Controller
     public function index()
     {
         //
+        return view('religion.index');
     }
 
     /**

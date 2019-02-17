@@ -14,7 +14,7 @@ class EstadoController extends Controller
     public function index()
     {
         //
-        return 'Hola desde el controlador Estado!';
+        return view('estado.index');
     }
 
     /**
@@ -25,6 +25,7 @@ class EstadoController extends Controller
     public function create()
     {
         //
+        return view('estado.create');
     }
 
     /**
@@ -47,6 +48,7 @@ class EstadoController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**
