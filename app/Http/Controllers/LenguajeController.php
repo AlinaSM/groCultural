@@ -2,6 +2,7 @@
 
 namespace GroCultural\Http\Controllers;
 
+use GroCultural\Lenguaje;
 use Illuminate\Http\Request;
 
 class LenguajeController extends Controller
@@ -41,8 +42,8 @@ class LenguajeController extends Controller
 
         $lenguaje->nombre = $request->input('nombre'); 
         $lenguaje->descripcion = $request->input('descripcion'); 
-+*/
-        return 'Dato guardado!';
+        */
+        return $request->all();
     }
 
     /**

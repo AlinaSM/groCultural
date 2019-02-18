@@ -2,6 +2,7 @@
 
 namespace GroCultural\Http\Controllers;
 
+use GroCultural\Region;
 use Illuminate\Http\Request;
 
 class RegionController extends Controller
@@ -13,8 +14,9 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
-        return view('region.index');
+        $region = Region::all();
+
+        return view('region.index', compact('region'));
     }
 
     /**
