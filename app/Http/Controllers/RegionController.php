@@ -15,7 +15,6 @@ class RegionController extends Controller
     public function index()
     {
         $region = Region::all();
-
         return view('region.index', compact('region'));
     }
 
@@ -26,7 +25,7 @@ class RegionController extends Controller
      */
     public function create()
     {
-        //
+        return view('region.create');
     }
 
     /**
@@ -37,7 +36,27 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if( $request->hasFile('mapa')){
+            $fileMapa = $request->file('mapa');
+            $nameMapa = time().$fileMapa->getClientOriginalName();
+            $pathMapas = '/images/mapas';
+            $fileMapa->move(public_path($pathMapas), $nameMapa);
+            
+        }
+        
+        $region = new Region();
+        
+        $region->nombre = $request->input('nombre'); 
+        $region->capital = $request->input('capital_regional'); 
+        $region->extension_territorial = $request->input('extension_territorial'); 
+        $region->ubicacion_geografica = $request->input('ubicacion_geografica'); 
+        $region->numero_habitantes = $request->input('numero_habitantes');
+        $region->numero_municipios = $request->input('numero_municipios');
+        $region->descripcion = $request->input('descripcion'); 
+        $region->imagen_estado = $pathMapas . '/'.$nameMapa ; 
+
+        $region->save();
+        return "Region save!";
     }
 
     /**
@@ -48,7 +67,6 @@ class RegionController extends Controller
      */
     public function show($id)
     {
-        //
         return view('region.index');
     }
 

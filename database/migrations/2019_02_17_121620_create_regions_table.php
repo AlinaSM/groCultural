@@ -29,6 +29,7 @@ class CreateRegionsTable extends Migration
             $table->string('ubicacion_geografica', 45)->default('Información no disponible');
             $table->string('numero_habitantes')->nullable()->default('Información no disponible');
             $table->integer('numero_municipios');
+            $table->longText('descripcion');
             $table->string('mapa')->nullable()->default(null);
             $table->integer('id_estado')->unsigned();
             $table->timestamps();

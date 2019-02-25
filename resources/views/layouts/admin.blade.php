@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> GroCultural - @yield('title')</title>
+    <title> Administracion del sitio GroCultural - @yield('title')</title>
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href=" {{ asset('css/materialize.min.css') }}"> 
@@ -11,7 +11,7 @@
   <body>
       
     <nav>
-        <div class="nav-wrapper   light-green darken-3">
+        <div class="nav-wrapper  blue-grey">
             <a href="/" class="brand-logo">GroCultural</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
@@ -30,7 +30,7 @@
     @yield('content') 
 
  
-    <footer class="page-footer  light-green darken-3">
+    <footer class="page-footer  blue-grey">
         <div class="container ">
             <div class="row">
                 <div class="col l6 s12">

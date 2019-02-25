@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/admin', function () {
+    return view('admin.login');
+});
 
 Route::get('/nombre/{name}/apellido/{lastname?}', function ($name, $lastname = '[REDACTED]') {
     return 'Hola '.$name. ' ' .$lastname.'!, ¿Como estas?';
