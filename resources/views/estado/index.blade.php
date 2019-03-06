@@ -36,7 +36,7 @@
                                 <label for="mapa" class="white-text">Escudo de {{ $estado->nombre }} </label>                                
                             </div>
                             <div class="col s8">
-                            <h4>El estado de {{ $estado->nombre }} cuenta con un total de {{$estado->numero_municipios}}</h4>
+                            <h4>El estado de {{ $estado->nombre }} cuenta con un total de {{$estado->numero_municipios}} municipios.</h4>
                             <h4>a lo largo de {{ $estado->extension_territorial }} km²</h4>
                             <h5>y su capital es <strong><i>{{ $estado->capital }}</i> </strong> </h5>
                             </div>
