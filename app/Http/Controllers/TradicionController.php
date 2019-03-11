@@ -24,7 +24,7 @@ class TradicionController extends Controller
      */
     public function create()
     {
-        //
+        return view('tradicion.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class TradicionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->all();
     }
 
     /**

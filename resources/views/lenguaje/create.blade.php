@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Estado')
+@section('title', 'Creando lenguajes')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 <form class="col s12">
                   <div class="row">
                     <div class="input-field col s12">
-                      <input placeholder="Lengua..." id="lenguaje" name = "lenguaje" type="text" class="validate">
+                      <input placeholder="Lengua..." id="lenguaje" name = "nombre" type="text" class="validate">
                       <label for="lenguaje">Nombre de la lengua:</label>
                     </div>
                 </div>

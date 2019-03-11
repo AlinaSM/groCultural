@@ -12,6 +12,7 @@
                     <div class="row container">
                         <h2 class="header">Estado de {{ $estado->nombre }}</h2>
                     </div>
+                    
                     <div class="row container">
                         <div class="col s8">
                             <p class="grey-text text-darken-3 lighten-3">
@@ -24,7 +25,7 @@
                         </div>
                        
                     </div>
-                </div>
+            </div>
 
                 <div class="parallax-container">
                     <div class="parallax"><img src="{{ asset('images/guerrerense01.jpg') }}"></div>
