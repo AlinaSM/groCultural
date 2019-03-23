@@ -24,7 +24,7 @@ class MunicipioController extends Controller
      */
     public function create()
     {
-        //
+        return view('municipio.create');//
     }
 
     /**
@@ -35,7 +35,7 @@ class MunicipioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->all();//
     }
 
     /**

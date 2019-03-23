@@ -24,7 +24,7 @@ class ReligionController extends Controller
      */
     public function create()
     {
-        //
+        return view('religion.create');
     }
 
     /**
@@ -36,6 +36,7 @@ class ReligionController extends Controller
     public function store(Request $request)
     {
         //
+        return $request->all();
     }
 
     /**
