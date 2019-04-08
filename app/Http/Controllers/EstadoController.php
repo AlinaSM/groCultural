@@ -12,12 +12,19 @@ class EstadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() 
     {
         $estados = Estado::all();
         return view('estado.index', compact('estados'));
     }
 
+    public function tasks() 
+    { 
+        session_start();
+        $estados = Estado::all();
+        return view('estado.tasks', compact('estados'));
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

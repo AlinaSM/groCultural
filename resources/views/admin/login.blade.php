@@ -6,7 +6,7 @@
 
 <div class="container">
     <h1>Login</h1>
-        <form  method="POST" action="/usuarios" enctype="multipart/form-data">
+        <form  method="POST" action="/admin" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="input-field col s6 offset-s3">
@@ -15,7 +15,7 @@
                 </div>
                 <div class="input-field col s6 offset-s3">
                     <label for="">Contraseña</label>
-                    <input placeholder="Ingrese su contraseña..." name ="contrasena" type="text" class="validate">
+                    <input placeholder="Ingrese su contraseña..." name ="contrasena" type="password" class="validate">
                 </div>
             </div>
 

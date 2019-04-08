@@ -5,7 +5,7 @@ namespace GroCultural\Http\Controllers;
 use GroCultural\Usuario;
 use Illuminate\Http\Request;
 
-class UsuarioController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,6 @@ class UsuarioController extends Controller
     public function index()
     {
         //
-        $usuarios = Usuario::all(); 
-        return $usuarios;
     }
 
     /**
@@ -27,7 +25,6 @@ class UsuarioController extends Controller
     public function create()
     {
         //
-        return view('usuario.create');
     }
 
     /**
@@ -38,20 +35,37 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        //
+        $login = false;
 
-        $usuario = new Usuario();
-        
-        $usuario->username           =   $request->input('username'); 
-        $usuario->contrasena         =   $request->input('contrasena'); 
-        $usuario->nombre             =   $request->input('nombre'); 
-        $usuario->apellidos          =   $request->input('apellido'); 
-        $usuario->correo_electronico =   $request->input('correo_electronico');
-        $usuario->tipo_usuario       =   $request->input('tipo_usuario'); 
+        $usuarios = Usuario::all();
 
-        $usuario->save();
-        return view('usuario.confirmacion');; // Returna a una vista que confirme que se creo adecuadamente el usuario
-        
-        
+        foreach($usuarios as $user){
+            if($request->alias == $user->username && $request->contrasena == $user->contrasena ){
+                $value = session('key', 'default');
+                /*
+                Session::push('id', $user->id);
+                Session::push('tipo', $user->tipo_usuario);
+                Session::push('username', $user->username);
+                Session::push('nombre', $user->nombre);
+                Session::push('apellidos', $user->apellidos);
+                Session::push('correo_electronico', $user->correo_electronico);
+                */
+
+                session_start();
+                $_SESSION['status'] = 'activa';
+                $_SESSION['user'] = $user->username;
+                $login = true;
+            }
+        }
+
+        if($login){
+            //TODO: Inicializar los datos de session
+            
+            return view('admin.home');
+        }else{
+            return view('admin.login'); //TODO: Alertar que el login no se ejecuto
+        }
     }
 
     /**

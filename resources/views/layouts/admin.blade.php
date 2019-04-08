@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,50 +8,61 @@
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href=" {{ asset('css/materialize.min.css') }}"> 
+    <link rel="stylesheet" href=" {{ asset('css/style.css') }}"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
-      
-    <nav>
-        <div class="nav-wrapper  blue-grey">
-            <a href="/" class="brand-logo">GroCultural</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-            <li><a href="/estado">Estado</a></li>
-            <li><a href="/regiones">Regiones</a></li>
-            <li><a href="/municipios">Municipios</a></li>
-            <li><a href="/tradiciones">Tradiciones</a></li>
-            <li><a href="/sitios">Sitios de Interes</a></li>
-            <li><a href="/lenguajes">Lenguajes</a></li>
-            <li><a href="/religiones">Religiones</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Page Content goes here -->
-    @yield('content') 
-
- 
-    <footer class="page-footer  blue-grey">
+    <!-- NAVBAR -->
+    <header class=  @isset($_SESSION['status'])  {{'headerBar'}}  @endisset>
+        <nav>
+            <div class="nav-wrapper  blue-grey">
+                <a href="/" class="brand-logo">GroCultural</a> 
+            </div>
+        </nav>
+    </header>
+   
+    @isset($_SESSION['status'])
+    <ul id="sidenav-1" class="sidenav sidenav-fixed blue-grey ">
+        <li><a class="subheader">
+            <img src="">    
+        </a></li>
+        <li>Datos del Sistema</li>
+        <li><a href="/admin/estados/tasks" target="_blank">Estado</a></li>
+        <li><a href="/admin/regiones/tasks" target="_blank">Regiones</a></li>
+        <li><a href="/admin/municipios/tasks" target="_blank">Municipios</a></li>
+        <li><a href="/admin/tradiciones/tasks" target="_blank">Tradiciones</a></li>
+        <li><a href="/admin/sitios/tasks" target="_blank">Lugares de Interes</a></li>
+        <li><a href="/admin/religiones/tasks" target="_blank">Religiones</a></li>
+        <li><a href="/admin/lenguajes/tasks" target="_blank">Lenguajes</a></li>
+        <li><a href="/admin/fauna/tasks" target="_blank">Fauna</a></li>
+        <li><a href="/admin/flora/tasks" target="_blank">Flora</a></li>
+        <li>Datos del Usuario</li>
+        <li><a href="" target="_blank">Editar Perfil</a></li>
+        <br><br>    
+        <li>Sobre el Sistema</li>
+        <li>
+           <i>
+            Desarrollado por: <br>
+            Alina Salinas Mendoza 
+            Fco. Gerardo Salinas Mendoza 
+           </i>
+        </li>
+    </ul>       
+    @endisset
+    <!-- LEFT SIDEBAR	 -->
+    
+    
+    
+    <main class= @isset($_SESSION['status'])  {{'mainBar'}}  @endisset>
         <div class="container ">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Guerrero Cultural</h5>
-                    <p class="grey-text text-lighten-4">Sistema de informacion desarrollado por:</p>
-                    <p class="grey-text text-lighten-4">Alina Salinas Mendoza</p>
-                    <p class="grey-text text-lighten-4">Francisco Gdo. Salinas Mendoza</p>
-                </div>
-            
-            </div>
+                @yield('content') 
         </div>
-        <div class="footer-copyright">
-            <div class="container">
-            © 2019 Copyright 
-            </div>
-        </div>
-    </footer>
+    </main>
 
+
+   
 
     <script src="{{ asset('js/materialize.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }} "></script>

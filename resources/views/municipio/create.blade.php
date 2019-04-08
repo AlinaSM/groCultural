@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Creando Municipios')
 
 @section('content')
 
-<div class="container">
+
         <h1>Alta de Municipios</h1>
             <form  method="POST" action="/municipios" enctype="multipart/form-data">
                 @csrf
@@ -79,5 +79,5 @@
 
             </form>
                     
-    </div>
+
 @endsection

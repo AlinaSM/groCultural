@@ -33,11 +33,14 @@
     <footer class="page-footer  light-green darken-3">
         <div class="container ">
             <div class="row">
+                <h5 class="white-text">Guerrero Cultural</h5>
                 <div class="col l6 s12">
-                    <h5 class="white-text">Guerrero Cultural</h5>
                     <p class="grey-text text-lighten-4">Sistema de informacion desarrollado por:</p>
                     <p class="grey-text text-lighten-4">Alina Salinas Mendoza</p>
                     <p class="grey-text text-lighten-4">Francisco Gdo. Salinas Mendoza</p>
+                </div>
+                <div class="col l6 s12">
+                    <a href="/login" class='grey-text text-lighten-4'> Sistema de Informacion Cultural del Estado de Guerrero </a>
                 </div>
             
             </div>
