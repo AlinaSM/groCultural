@@ -32,9 +32,11 @@ class EstadoController extends Controller
      */
     public function create()
     {
-        //
+        session_start();
         return view('estado.create');
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -44,6 +46,7 @@ class EstadoController extends Controller
      */
     public function store(Request $request)
     {
+        session_start();   
         if($request->hasFile('imagen_estado') && $request->hasFile('imagen_escudo')){
             $fileEstado = $request->file('imagen_estado');
             $fileEscudo = $request->file('imagen_escudo');
@@ -73,8 +76,10 @@ class EstadoController extends Controller
         $estado->imagen_escudo = $pathEscudos . '/'.$nameEscudo ; 
 
         $estado->save();
-        return "Save!";
-        
+
+        $op = 'Se ha dado de alta correctamente el registro';
+        return view('admin.confirmar', compact('op'));
+
     }
 
     /**
@@ -83,10 +88,16 @@ class EstadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $op = null)
     {
-        //
-        
+        session_start();
+        $estados = Estado::all();
+
+        foreach($estados as $estado){
+            if( $estado->id_estado == $id){
+                return view('estado.show',compact('estado'));
+            }
+        }
     }
 
     /**
@@ -97,7 +108,15 @@ class EstadoController extends Controller
      */
     public function edit($id)
     {
-        //
+        session_start();
+        $estados = Estado::all();
+       
+        foreach($estados as $estado){
+            if( $estado->id_estado == $id){
+                return view('estado.edit',compact('estado'));
+            }
+        }
+        
     }
 
     /**
@@ -110,6 +129,41 @@ class EstadoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        session_start();
+        $estados = Estado::find($id);
+        //$estados->fill($request->except('imagen_estado','imagen_escudo'));
+        
+        $estados->nombre = $request->input('nombre'); 
+        $estados->gentilicio = $request->input('gentilicio'); 
+        $estados->capital = $request->input('capital'); 
+        $estados->extension_territorial = $request->input('extension_territorial'); 
+        $estados->num_habitantes = $request->input('num_habitantes');
+        $estados->numero_municipios = $request->input('numero_municipios'); 
+        $estados->descripcion = $request->input('descripcion'); 
+
+        if($request->hasFile('imagen_estado')){
+            
+            \File::delete( public_path(). $estados->imagen_estado );
+            $file = $request->file('imagen_estado');
+            $name = time().$file->getClientOriginalName();
+            $estados->imagen_estado = '/images/mapas/'.$name;
+            $file->move(public_path('/images/mapas'), $name);
+        }
+
+
+        
+        if($request->hasFile('imagen_escudo')){
+            \File::delete( public_path(). $estados->imagen_escudo );
+            $file = $request->file('imagen_escudo');
+            $name = time().$file->getClientOriginalName();
+            $estados->imagen_escudo = '/images/escudos/'.$name;
+            $file->move(public_path('/images/escudos'), $name);
+            
+        }
+        $estados->save();
+
+        $op = 'Se ha modificado correctamente el registro';
+        return view('admin.confirmar', compact('op'));
     }
 
     /**
@@ -120,6 +174,17 @@ class EstadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        session_start();
+        $estados = Estado::find($id);
+        $file_path_escudo = public_path(). $estados->imagen_escudo;
+        $file_path_estado = public_path(). $estados->imagen_estado;
+        
+        \File::delete( $file_path_escudo );
+        \File::delete( $file_path_estado );
+        
+        $estados->delete();
+        $op = 'Se ha eliminado el registro correctamente';
+        return view('admin.confirmar', compact('op'));
+        
     }
 }
