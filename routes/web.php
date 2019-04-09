@@ -14,11 +14,17 @@
 Route::get('/', function () {
     return view('home');
 });
+
 Route::get('/login', function () {
     return view('admin.login');
 });
 
+Route::get('/logout', function () {
+    return view('admin.login');
+});
 
+
+Route::get('/logout', 'LoginController@logout');
 Route::get('/admin/estados/tasks', 'EstadoController@tasks');
 Route::get('/admin/regiones/tasks', 'RegionController@tasks');
 Route::get('/admin/municipios/tasks', 'MunicipioController@tasks');
@@ -28,6 +34,10 @@ Route::get('/admin/religiones/tasks', 'ReligionController@tasks');
 Route::get('/admin/lenguajes/tasks', 'LenguajeController@tasks');
 Route::get('/admin/fauna/tasks', 'FaunaController@tasks');
 Route::get('/admin/flora/tasks', 'FloraController@tasks');
+
+Route::get('/admin/estado/show/{id}', 'EstadoController@show');
+//Route::get('/admin/estado/show/{id}/e', 'EstadoController@show');
+Route::get('/admin/estado/destroy/{id}', 'EstadoController@destroy');
 
 
 Route::resources([

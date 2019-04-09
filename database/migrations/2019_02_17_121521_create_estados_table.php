@@ -25,7 +25,7 @@ class CreateEstadosTable extends Migration
             $table->increments('id_estado');
             $table->string('nombre', 45);
             $table->string('capital', 45)->default('Información no disponible');
-            $table->string('extension_territorial')->default('Información no disponible');
+            $table->integer('extension_territorial');
             $table->string('gentilicio', 45)->default('Información no disponible');
             $table->integer('numero_municipios');
             $table->longText('descripcion');

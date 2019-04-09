@@ -19,7 +19,13 @@
         <nav>
             <div class="nav-wrapper  blue-grey">
                 <a href="/" class="brand-logo">GroCultural</a> 
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    @isset($_SESSION['status']) 
+                      <li><a href="/logout">Cerrar Sesion</a></li>
+                    @endisset
+                </ul>
             </div>
+
         </nav>
     </header>
    
@@ -29,17 +35,17 @@
             <img src="">    
         </a></li>
         <li>Datos del Sistema</li>
-        <li><a href="/admin/estados/tasks" target="_blank">Estado</a></li>
-        <li><a href="/admin/regiones/tasks" target="_blank">Regiones</a></li>
-        <li><a href="/admin/municipios/tasks" target="_blank">Municipios</a></li>
-        <li><a href="/admin/tradiciones/tasks" target="_blank">Tradiciones</a></li>
-        <li><a href="/admin/sitios/tasks" target="_blank">Lugares de Interes</a></li>
-        <li><a href="/admin/religiones/tasks" target="_blank">Religiones</a></li>
-        <li><a href="/admin/lenguajes/tasks" target="_blank">Lenguajes</a></li>
-        <li><a href="/admin/fauna/tasks" target="_blank">Fauna</a></li>
-        <li><a href="/admin/flora/tasks" target="_blank">Flora</a></li>
+        <li><a href="/admin/estados/tasks" >Estado</a></li>
+        <li><a href="/admin/regiones/tasks" >Regiones</a></li>
+        <li><a href="/admin/municipios/tasks" >Municipios</a></li>
+        <li><a href="/admin/tradiciones/tasks" >Tradiciones</a></li>
+        <li><a href="/admin/sitios/tasks" >Sitios de Interes</a></li>
+        <li><a href="/admin/religiones/tasks" >Religiones</a></li>
+        <li><a href="/admin/lenguajes/tasks" >Lenguajes</a></li>
+        <li><a href="/admin/fauna/tasks" >Fauna</a></li>
+        <li><a href="/admin/flora/tasks" >Flora</a></li>
         <li>Datos del Usuario</li>
-        <li><a href="" target="_blank">Editar Perfil</a></li>
+        <li><a href="" >Editar Perfil</a></li>
         <br><br>    
         <li>Sobre el Sistema</li>
         <li>
@@ -56,9 +62,7 @@
     
     
     <main class= @isset($_SESSION['status'])  {{'mainBar'}}  @endisset>
-        <div class="container ">
-                @yield('content') 
-        </div>
+        @yield('content') 
     </main>
 
 

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    public function logout(){
+        session_start();
+        session_destroy();
+      
+    }
     /**
      * Display a listing of the resource.
      *
