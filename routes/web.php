@@ -36,8 +36,11 @@ Route::get('/admin/fauna/tasks', 'FaunaController@tasks');
 Route::get('/admin/flora/tasks', 'FloraController@tasks');
 
 Route::get('/admin/estado/show/{id}', 'EstadoController@show');
-//Route::get('/admin/estado/show/{id}/e', 'EstadoController@show');
 Route::get('/admin/estado/destroy/{id}', 'EstadoController@destroy');
+
+Route::get('/admin/regiones/show/{id}', 'RegionController@show');
+Route::get('/admin/regiones/destroy/{id}', 'RegionController@destroy');
+Route::get('/regiones/regionesByEstado/{id}', 'RegionController@regionesByEstado');
 
 
 Route::resources([
