@@ -2,6 +2,7 @@
 
 namespace GroCultural\Http\Controllers;
 
+use GroCultural\Religion;
 use Illuminate\Http\Request;
 
 class ReligionController extends Controller
@@ -17,6 +18,12 @@ class ReligionController extends Controller
         return view('religion.index');
     }
 
+    public function tasks() 
+    { 
+        session_start();
+        $religiones = Religion::where( 'disponibilidad', 'Disponible' )->get();
+        return view('religion.tasks', compact('religiones'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -24,6 +31,7 @@ class ReligionController extends Controller
      */
     public function create()
     {
+        session_start();
         return view('religion.create');
     }
 
@@ -35,8 +43,17 @@ class ReligionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return $request->all();
+        session_start();
+        $religion = new Religion();
+        
+        $religion->nombre = $request->input('nombre'); 
+        $religion->descripcion = $request->input('descripcion'); 
+        $religion->disponibilidad = "Disponible";
+
+        $religion->save();
+
+        $op = 'Se ha dado de alta correctamente el registro';
+        return view('admin.confirmar', compact('op'));
     }
 
     /**
@@ -47,7 +64,11 @@ class ReligionController extends Controller
      */
     public function show($id)
     {
-        //
+        session_start();
+        
+        $religion  =  Religion::where( 'id_religion', $id )->get();
+        $religion = $religion[0];
+        return view('religion.show',compact('religion'));
     }
 
     /**
@@ -58,7 +79,10 @@ class ReligionController extends Controller
      */
     public function edit($id)
     {
-        //
+        session_start();
+        $religion  =  Religion::where( 'id_religion', $id )->get();
+        $religion = $religion[0];
+        return view('religion.edit', compact('religion'));
     }
 
     /**
@@ -70,7 +94,18 @@ class ReligionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        session_start();
+        $religiones = Religion::find($id);
+        //$estados->fill($request->except('imagen_estado','imagen_escudo'));
+        
+        $religiones->nombre = $request->input('nombre'); 
+        $religiones->descripcion = $request->input('descripcion'); 
+        $religiones->disponibilidad = "Disponible";
+
+        $religiones->save();
+
+        $op = 'Se ha modificado correctamente el registro';
+        return view('admin.confirmar', compact('op'));
     }
 
     /**
@@ -81,6 +116,11 @@ class ReligionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        session_start();
+        $religion = Religion::find($id);
+        $religion->disponibilidad = "noDisponible";
+        $religion->save();
+        $op = 'Se ha eliminado el registro correctamente';
+        return view('admin.confirmar', compact('op'));
     }
 }
