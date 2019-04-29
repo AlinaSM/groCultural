@@ -36,10 +36,19 @@ Route::get('/admin/fauna/tasks', 'FaunaController@tasks');
 Route::get('/admin/flora/tasks', 'FloraController@tasks');
 
 Route::get('/admin/estado/show/{id}', 'EstadoController@show');
-Route::get('/admin/estado/destroy/{id}', 'EstadoController@destroy');
-
 Route::get('/admin/regiones/show/{id}', 'RegionController@show');
+
+Route::get('/admin/religiones/show/{id}', 'ReligionController@show');
+Route::get('/admin/lenguajes/show/{id}', 'LenguajeController@show');
+Route::get('/admin/tradiciones/show/{id}', 'TradicionController@show');
+Route::get('/admin/sitios/show/{id}', 'SitioInteresController@show');
+
+
+
+Route::get('/admin/estado/destroy/{id}', 'EstadoController@destroy');
 Route::get('/admin/regiones/destroy/{id}', 'RegionController@destroy');
+Route::get('/admin/religiones/destroy/{id}', 'ReligionController@destroy');
+
 Route::get('/regiones/regionesByEstado/{id}', 'RegionController@regionesByEstado');
 
 
