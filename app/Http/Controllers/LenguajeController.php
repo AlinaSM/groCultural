@@ -18,6 +18,13 @@ class LenguajeController extends Controller
         return view('lenguaje.index');
     }
 
+    public function tasks() 
+    { 
+        session_start();
+        $lenguajes = Lenguaje::where( 'disponibilidad', 'Disponible' )->get();
+        return view('lenguaje.tasks', compact('lenguajes'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -26,6 +33,7 @@ class LenguajeController extends Controller
     public function create()
     {
         //
+        session_start();
         return view('lenguaje.create');
     }
 
@@ -37,13 +45,17 @@ class LenguajeController extends Controller
      */
     public function store(Request $request)
     {
-        /*
+        session_start();
         $lenguaje = new Lenguaje();
-
+        
         $lenguaje->nombre = $request->input('nombre'); 
         $lenguaje->descripcion = $request->input('descripcion'); 
-        */
-        return $request->all();
+        $lenguaje->disponibilidad = "Disponible";
+
+        $lenguaje->save();
+
+        $op = 'Se ha dado de alta correctamente el registro';
+        return view('admin.confirmar', compact('op'));
     }
 
     /**
@@ -55,6 +67,10 @@ class LenguajeController extends Controller
     public function show($id)
     {
         //
+        session_start();
+        $lenguaje  =  Lenguaje::where( 'id_lengua', $id )->get();
+        $lenguaje = $lenguaje[0];
+        return view('lenguaje.show',compact('lenguaje'));
     }
 
     /**
@@ -66,6 +82,10 @@ class LenguajeController extends Controller
     public function edit($id)
     {
         //
+        session_start();
+        $lenguaje  =  Lenguaje::where( 'id_lengua', $id )->get();
+        $lenguaje = $lenguaje[0];
+        return view('lenguaje.edit',compact('lenguaje'));
     }
 
     /**
@@ -78,6 +98,19 @@ class LenguajeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        session_start();
+        $lenguaje = Lenguaje::find($id);
+        //$estados->fill($request->except('imagen_estado','imagen_escudo'));
+        
+        $lenguaje->nombre = $request->input('nombre'); 
+        $lenguaje->descripcion = $request->input('descripcion'); 
+        $lenguaje->disponibilidad = "Disponible";
+
+        $lenguaje->save();
+
+        $op = 'Se ha modificado correctamente el registro';
+        return view('admin.confirmar', compact('op'));
+
     }
 
     /**
@@ -88,6 +121,11 @@ class LenguajeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        session_start();
+        $lenguaje = Lenguaje::find($id);
+        $lenguaje->disponibilidad = "noDisponible";
+        $lenguaje->save();
+        $op = 'Se ha eliminado el registro correctamente';
+        return view('admin.confirmar', compact('op'));
     }
 }

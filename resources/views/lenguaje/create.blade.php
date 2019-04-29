@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Creando lenguajes')
 
@@ -14,14 +14,14 @@
                   <div class="row">
                     <div class="input-field col s12">
                       <input placeholder="Lengua..." id="lenguaje" name = "nombre" type="text" class="validate">
-                      <label for="lenguaje">Nombre de la lengua:</label>
+                      <label for="lenguaje">Nombre del lenguaje:</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea name="descripcion" class="materialize-textarea"></textarea>
-                        <label for="descripcion">Descripcion de la lengua...</label>
+                        <label for="descripcion">Descripcion del lenguaje...</label>
                         
                     </div>
                 </div>  
