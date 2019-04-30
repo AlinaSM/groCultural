@@ -48,6 +48,7 @@ Route::get('/admin/sitios/show/{id}', 'SitioInteresController@show');
 Route::get('/admin/estado/destroy/{id}', 'EstadoController@destroy');
 Route::get('/admin/regiones/destroy/{id}', 'RegionController@destroy');
 Route::get('/admin/religiones/destroy/{id}', 'ReligionController@destroy');
+Route::get('/admin/lenguajes/destroy/{id}', 'LenguajeController@destroy');
 
 Route::get('/regiones/regionesByEstado/{id}', 'RegionController@regionesByEstado');
 
