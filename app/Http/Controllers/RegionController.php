@@ -26,8 +26,19 @@ class RegionController extends Controller
         $estados = Estado::all();
         return view('region.tasks', compact('regiones', 'estados'));
     }
+
+    public function regionesByEstado( $id ){
+        $regiones = Region::where( 'id_estado', $id )->where( 'disponibilidad', 'Disponible' )->get();
+
+        $arrayRegiones = array();
+        foreach($regiones as $region){
+            array_push($arrayRegiones, array( 'id' => $region->id_region , 'region' => $region->nombre ) );   
+        }
+
+        echo json_encode($arrayRegiones);
+    }
     
-    public function regionesByEstado($id) 
+    public function tablaRegionesByEstado($id) 
     { 
         session_start();
         
