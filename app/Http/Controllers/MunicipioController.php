@@ -2,6 +2,8 @@
 
 namespace GroCultural\Http\Controllers;
 
+use GroCultural\Estado;
+
 use Illuminate\Http\Request;
 
 class MunicipioController extends Controller
@@ -16,6 +18,15 @@ class MunicipioController extends Controller
         //
         return view('municipio.index');
     }
+
+    public function tasks() 
+    { 
+        session_start();
+        //$regiones = Region::all();
+        $estados = Estado::all();
+        return view('municipio.tasks', compact( 'estados'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

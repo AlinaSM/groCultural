@@ -68,8 +68,11 @@
 
    
 
-    <script src="{{ asset('js/materialize.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }} "></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script> 
+
+    
     <script src="{{ asset('js/main.js') }} "></script>
     <script src="{{ asset('js/materialize.js') }} "></script>
   </body>

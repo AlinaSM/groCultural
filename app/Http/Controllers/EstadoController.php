@@ -24,6 +24,22 @@ class EstadoController extends Controller
         $estados = Estado::all();
         return view('estado.tasks', compact('estados'));
     }
+
+
+    public function getAllElements(){
+        $estados = Estado::where( 'disponibilidad', 'Disponible' )->get();
+        // $estados = Region::where( 'id_estado', $id )->where( 'disponibilidad', 'Disponible' )->get();
+
+        $array = array();
+        foreach($estados as $registro){
+            array_push($array, array( 'id' => $registro->id_estado , 'estado' => $registro->nombre ) );   
+        }
+
+        echo json_encode($array);
+    }
+
+
+
     
     /**
      * Show the form for creating a new resource.
