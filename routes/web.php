@@ -54,6 +54,9 @@ Route::get('/regiones/tablaRegionesByEstado/{id}', 'RegionController@tablaRegion
 Route::get('/regiones/regionesByEstado/{id}', 'RegionController@regionesByEstado');
 Route::get('/estados/getAll', 'EstadoController@getAllElements');
 
+Route::get('/municipios/tablaMunicipiosByRegion/{idRegion}', 'MunicipioController@tablaMunicipiosByRegion');
+
+
 Route::resources([
     'usuarios'    =>  'UsuarioController',
     'admin'       =>  'LoginController',

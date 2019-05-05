@@ -3,6 +3,8 @@
 namespace GroCultural\Http\Controllers;
 
 use GroCultural\Estado;
+use GroCultural\Municipio;
+
 
 use Illuminate\Http\Request;
 
@@ -27,6 +29,41 @@ class MunicipioController extends Controller
         return view('municipio.tasks', compact( 'estados'));
     }
 
+    public function tablaMunicipiosByRegion( $idRegion ){
+        session_start();
+        
+        $municipios = Municipio::where( 'id_region', $idRegion )->where( 'disponibilidad', 'Disponible' )->get();
+        
+        $cadena = "<table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nombre</th>
+                <th>Nombre</th>
+                <th>Clima</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead> <tbody>";
+
+        foreach($municipios as $municipio){
+        $cadena = $cadena ."<tr>
+                                <td> $municipio->id_municipio </td>
+                                <td> $municipio->nombre  </td>
+                                <td> $municipio->clima  </td>
+                                <td> $municipio->numero_habitantes  </td>
+       
+                                <td> 
+                                    <a href='/municipios/$municipio->id_municipio/edit' class='btn tooltipped' data-position='bottom' data-tooltip='Modificar'><i class='material-icons'>cached</i></a>
+                                    <a href='/admin/municipios/show/ $municipio->id_municipio' class='btn tooltipped red darken-4' data-position='bottom' data-tooltip='Eliminar'><i class='material-icons'>delete_forever</i></a>
+                                </td>
+                            </tr>";
+        }
+        
+        
+        return $cadena . " </tbody> </table>";
+
+    } 
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,6 +72,7 @@ class MunicipioController extends Controller
      */
     public function create()
     {
+        session_start();
         return view('municipio.create');//
     }
 
@@ -46,7 +84,36 @@ class MunicipioController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();//
+        session_start();
+       
+        if( $request->hasFile('mapa') && $request->hasFile('escudo') ){
+            $fileMapa = $request->file('mapa');
+            $nameMapa = time().$fileMapa->getClientOriginalName();
+            $pathMapas = '/images/mapas';
+            $fileMapa->move(public_path($pathMapas), $nameMapa);
+
+
+            $fileEscudo = $request->file('escudo');
+            $nameEscudo = time().$fileEscudo->getClientOriginalName();
+            $pathEscudo = '/images/escudos';
+            $fileEscudo->move(public_path($pathEscudo), $nameEscudo);
+        }
+
+        
+        $municipio = new Municipio();
+        
+        $municipio->nombre = $request->input('nombre'); 
+        $municipio->clima = $request->input('clima'); 
+        $municipio->numero_habitantes = $request->input('numero_habitantes'); 
+        $municipio->historia_general = $request->input('historia_general'); 
+        $municipio->id_region = $request->input('Region');
+        $municipio->mapa = $pathMapas . '/'.$nameMapa ; 
+        $municipio->escudo = $pathEscudo . '/'.$nameEscudo ;    
+        $municipio->disponibilidad = "Disponible";
+
+        $municipio->save();
+        $op = 'Se ha ingresado correctamente un nuevo municipio';
+        return view('admin.confirmar', compact('op'));
     }
 
     /**
@@ -57,7 +124,7 @@ class MunicipioController extends Controller
      */
     public function show($id)
     {
-        //
+        session_start();
     }
 
     /**
@@ -68,7 +135,7 @@ class MunicipioController extends Controller
      */
     public function edit($id)
     {
-        //
+        session_start();
     }
 
     /**
@@ -80,7 +147,7 @@ class MunicipioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        session_start();
     }
 
     /**
@@ -91,6 +158,6 @@ class MunicipioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        session_start();
     }
 }

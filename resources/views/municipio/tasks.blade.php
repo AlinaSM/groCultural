@@ -4,13 +4,6 @@
 
 @section('content')
 
-
-<script>
-    $(document).ready(function(){
-        $('select').material_select();
-    });
-</script>  
-
 <h2>
     Operaciones de municipios  
 </h2>
@@ -32,7 +25,7 @@
         </div>
     </div>
 
-     
+    <div id="mostrarTablaMunicipios"></div>
     
   
 @endsection

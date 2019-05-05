@@ -1,14 +1,23 @@
 $(document).ready(function(){
   $('#idEstado').val(0);
+
   recargarTablaDeRegionesByEstado();
   recargarSelectConEstados();
   recargarSelectConRegiones();
+  //recargarTablaDeMunicipiosByRegiones();
 
 
   $('#idEstado').change(function(){
     recargarTablaDeRegionesByEstado();
     recargarSelectConRegiones();
   });
+
+  $('#selectRegionesByEstado').change(function(){
+    
+    recargarTablaDeMunicipiosByRegiones();
+  });
+
+
 });
 
 function recargarTablaDeRegionesByEstado(){
@@ -18,6 +27,22 @@ function recargarTablaDeRegionesByEstado(){
       url: "/regiones/tablaRegionesByEstado/"+ valor,    
       success : function(r){
           $('#mostrarRegiones').html(r);
+      }
+
+  })
+}
+
+
+function recargarTablaDeMunicipiosByRegiones(){
+  
+  let valor = $('#selectRegionesByEstado').val();
+  $.ajax({
+      type: "GET",
+      url: "/municipios/tablaMunicipiosByRegion/"+ valor,    
+      success : function(r){
+        console.log(r);
+          $('#mostrarTablaMunicipios').html(r);
+          console.log(r);
       }
 
   })
