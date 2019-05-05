@@ -1,17 +1,17 @@
 $(document).ready(function(){
   $('#idEstado').val(0);
-  recargarLista();
+  recargarTablaDeRegionesByEstado();
   recargarSelectConEstados();
   recargarSelectConRegiones();
 
 
   $('#idEstado').change(function(){
-    recargarLista();
+    recargarTablaDeRegionesByEstado();
     recargarSelectConRegiones();
   });
 });
 
-function recargarLista(){
+function recargarTablaDeRegionesByEstado(){
   let valor = $('#idEstado').val();
   $.ajax({
       type: "GET",
