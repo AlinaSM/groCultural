@@ -13,7 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Collapsible.init(elems);
   });
   
-  
+  $(document).ready(function(){
+    $('select').material_select();
+});
+
+
   $(document).ready(function(){
     $('.sidenav').sidenav();
       $('#sidenav-1').sidenav({ edge: 'left' });
