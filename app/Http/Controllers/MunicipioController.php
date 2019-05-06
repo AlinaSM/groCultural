@@ -3,8 +3,8 @@
 namespace GroCultural\Http\Controllers;
 
 use GroCultural\Estado;
+use GroCultural\Region;
 use GroCultural\Municipio;
-
 
 use Illuminate\Http\Request;
 
@@ -125,6 +125,16 @@ class MunicipioController extends Controller
     public function show($id)
     {
         session_start();
+        
+        $municipio =  Municipio::where( 'id_municipio', $id )->get();
+        $region    =  Region::where( 'id_region', $municipio[0]->id_region )->get();
+        $estado    =  Estado::where( 'id_estado', $region[0]->id_estado )->get();
+
+        $municipio =  $municipio[0];
+        $region    =  $region[0];
+        $estado    =  $estado[0];
+        
+        return view('municipio.show',compact('municipio', 'region', 'estado'));
     }
 
     /**
@@ -159,5 +169,11 @@ class MunicipioController extends Controller
     public function destroy($id)
     {
         session_start();
+        
+        $municipio = Municipio::find($id);
+        $municipio->disponibilidad = "noDisponible";
+        $municipio->save();
+        $op = 'Se ha eliminado el registro correctamente';
+        return view('admin.confirmar', compact('op'));
     }
 }
