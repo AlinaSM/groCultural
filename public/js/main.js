@@ -4,6 +4,8 @@ $(document).ready(function(){
   recargarTablaDeRegionesByEstado();
   recargarSelectConEstados();
   recargarSelectConRegiones();
+  recargarSelectConTiposSitios();
+  recargarSelectConMunicipiosByRegiones();
   //recargarTablaDeMunicipiosByRegiones();
 
 
@@ -13,7 +15,7 @@ $(document).ready(function(){
   });
 
   $('#selectRegionesByEstado').change(function(){
-    
+    recargarSelectConMunicipiosByRegiones();
     recargarTablaDeMunicipiosByRegiones();
   });
 
@@ -48,6 +50,29 @@ function recargarTablaDeMunicipiosByRegiones(){
   })
 }
 
+function recargarSelectConTiposSitios(){
+  $.ajax({
+    type:"GET",
+    url:"/tipositios/getAll" ,
+    success:function(r){
+      let datos = JSON.parse(r);			
+     
+      var selectElemento = document.getElementById( 'idTipoSitio' );
+      selectElemento.length=0;	
+      selectElemento.options[0] = new Option('Elige un tipo','');
+      selectElemento.selectedIndex = 0;
+      
+      for (var i=0; i<datos.length; i++) {
+        selectElemento.options[selectElemento.length] = new Option(datos[i]['tipoSitio'], datos[i]['id']);
+      }	
+      $("#idTipoSitio").material_select();
+    
+      console.log(datos);
+    }
+  });
+}
+
+
 function recargarSelectConEstados(){
   $.ajax({
     type:"GET",
@@ -65,7 +90,7 @@ function recargarSelectConEstados(){
       }	
       $("#idEstado").material_select();
     
-      console.log(datos);
+      //console.log(datos);
     }
   });
 }
@@ -87,6 +112,29 @@ function recargarSelectConRegiones(){
         selectElemento.options[selectElemento.length] = new Option(datos[i]['region'], datos[i]['id']);
       }	
       $("#selectRegionesByEstado").material_select();
+    
+    }
+  });
+}
+
+
+function recargarSelectConMunicipiosByRegiones(){
+  let valor = $('#selectRegionesByEstado').val();
+  $.ajax({
+    type:"GET",
+    url:"/municipios/getByRegiones/" + valor,
+    success:function(r){
+      let datos = JSON.parse(r);			
+      
+      var selectElemento = document.getElementById( 'selectMunicipiosByRegiones' );
+      selectElemento.length=0;	
+      selectElemento.options[0] = new Option('Elige un municipio','');
+      selectElemento.selectedIndex = 0;
+      
+      for (var i=0; i<datos.length; i++) {
+        selectElemento.options[selectElemento.length] = new Option(datos[i]['municipio'], datos[i]['id']);
+      }	
+      $("#selectMunicipiosByRegiones").material_select();
     
     }
   });

@@ -16,16 +16,16 @@
         </div>
 
         <div class="row">
-                <div class="input-field col offset-s1 s4">
-                    <select name="Estado" id="idEstado"></select>
-                    <label>Estado:</label>
-                </div>
-        
-                <div class="input-field col offset-s1 s4">
-                    <select name="Region" id="selectRegionesByEstado"></select>
-                    <label>Regiones:</label>
-                </div>
+            <div class="input-field col offset-s1 s4">
+                <select name="Estado" id="idEstado"></select>
+                <label>Estado:</label>
             </div>
+    
+            <div class="input-field col offset-s1 s4">
+                <select name="Region" id="selectRegionesByEstado"></select>
+                <label>Regiones:</label>
+            </div>
+        </div>
         
         
         <div class="row">
