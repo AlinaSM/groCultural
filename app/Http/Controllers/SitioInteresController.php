@@ -105,7 +105,14 @@ class SitioInteresController extends Controller
      */
     public function edit($id)
     {
-        //
+        session_start();
+        $sitio = SitioInteres::where( 'id_interes_cult', $id )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $region = Region::where( 'id_region', $municipio->id_region )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $estado = Estado::where( 'id_estado', $region->id_estado )->where( 'disponibilidad', 'Disponible' )->get()[0];
+
+        return view('sitios.edit', compact('sitio', 'estado', 'region', 'municipio' ,'tipo'));
     }
 
     /**
@@ -117,7 +124,37 @@ class SitioInteresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        session_start();
+        $sitio = SitioInteres::find($id);
+        //$estados->fill($request->except('imagen_estado','imagen_escudo'));
+        
+        $sitio->nombre = $request->input('nombre'); 
+        $sitio->horario = $request->input('horario'); 
+        $sitio->direccion = $request->input('direccion'); 
+        $sitio->descripcion_general = $request->input('descripcion_general');
+        $sitio->disponibilidad = "Disponible";
+
+        if( $request->input('Municipio') ){
+            $sitio->id_municipio = $request->input('Municipio');
+        }
+
+        if( $request->input('tipo') ){
+            $sitio->id_tipo_interes = $request->input('tipo');
+        }
+
+        if($request->hasFile('imagen')){
+            
+            \File::delete( public_path(). $estados->imagen );
+            $file = $request->file('imagen');
+            $name = time().$file->getClientOriginalName();
+            $sitio->id_tipo_interes = '/images/intereses/'.$name;
+            $file->move(public_path('/images/intereses'), $name);
+        }
+
+        $sitio->save();
+
+        $op = 'Se ha modificado correctamente el registro';
+        return view('admin.confirmar', compact('op'));
     }
 
     /**

@@ -25,17 +25,17 @@
                                     </tr>
 
                                     <tr>
-                                        <td><b>Clima</b></td>
+                                        <td><b>Tipo</b></td>
                                         <td>{{ $tipo->nombre  }}</td>
                                     </tr>
 
                                     <tr>
-                                        <td><b>Historia general</b></td>
+                                        <td><b>Horario</b></td>
                                         <td>{{ $sitio->horario  }}</td>
                                     </tr> 
 
                                     <tr>
-                                        <td><b>Num. Habitantes</b></td>
+                                        <td><b>Direccion</b></td>
                                         <td>{{ $sitio->direccion  }}</td>
                                     </tr>
                                     <tr>
@@ -48,7 +48,7 @@
                                     </tr>
 
                                     <tr>
-                                        <td><b>Region</b></td>
+                                        <td><b>Municipio</b></td>
                                         <td>{{ $municipio->nombre  }}</td>
                                     </tr>
                         
