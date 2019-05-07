@@ -3,8 +3,12 @@
 namespace GroCultural\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GroCultural\TipoSitioInteres;
+
 use GroCultural\SitioInteres;
+use GroCultural\TipoSitioInteres;
+use GroCultural\Estado;
+use GroCultural\Region;
+use GroCultural\Municipio;
 
 class SitioInteresController extends Controller
 {
@@ -82,7 +86,15 @@ class SitioInteresController extends Controller
      */
     public function show($id)
     {
-        //
+        session_start();
+
+        $sitio = SitioInteres::where( 'id_interes_cult', $id )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $region = Region::where( 'id_region', $municipio->id_region )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $estado = Estado::where( 'id_estado', $region->id_estado )->where( 'disponibilidad', 'Disponible' )->get()[0];
+
+        return view('sitios.show', compact('sitio', 'estado', 'region', 'municipio' ,'tipo'));
     }
 
     /**
@@ -116,6 +128,12 @@ class SitioInteresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        session_start();
+        
+        $sitio = SitioInteres::find($id);
+        $sitio->disponibilidad = "noDisponible";
+        $sitio->save();
+        $op = 'Se ha eliminado el registro correctamente';
+        return view('admin.confirmar', compact('op'));
     }
 }

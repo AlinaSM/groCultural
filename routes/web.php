@@ -50,6 +50,7 @@ Route::get('/admin/regiones/destroy/{id}', 'RegionController@destroy');
 Route::get('/admin/religiones/destroy/{id}', 'ReligionController@destroy');
 Route::get('/admin/lenguajes/destroy/{id}', 'LenguajeController@destroy');
 Route::get('/admin/municipios/destroy/{id}', 'MunicipioController@destroy');
+Route::get('/admin/sitios/destroy/{id}', 'SitioInteresController@destroy');
 
 
 Route::get('/regiones/tablaRegionesByEstado/{id}', 'RegionController@tablaRegionesByEstado');
