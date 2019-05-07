@@ -29,6 +29,17 @@ class MunicipioController extends Controller
         return view('municipio.tasks', compact( 'estados'));
     }
 
+    public function municipiosByRegiones( $id ){
+        $municipios = Municipio::where( 'id_region', $id )->where( 'disponibilidad', 'Disponible' )->get();
+
+        $arrayElements = array();
+        foreach($municipios as $municipio){
+            array_push($arrayElements, array( 'id' => $municipio->id_municipio , 'municipio' => $municipio->nombre ) );   
+        }
+
+        echo json_encode($arrayElements);
+    }
+
     public function tablaMunicipiosByRegion( $idRegion ){
         session_start();
         

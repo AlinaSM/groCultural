@@ -55,8 +55,10 @@ Route::get('/admin/municipios/destroy/{id}', 'MunicipioController@destroy');
 Route::get('/regiones/tablaRegionesByEstado/{id}', 'RegionController@tablaRegionesByEstado');
 Route::get('/regiones/regionesByEstado/{id}', 'RegionController@regionesByEstado');
 Route::get('/estados/getAll', 'EstadoController@getAllElements');
+Route::get('/tipositios/getAll', 'TipoSitioInteresController@getAllElements');
 
 Route::get('/municipios/tablaMunicipiosByRegion/{idRegion}', 'MunicipioController@tablaMunicipiosByRegion');
+Route::get('/municipios/getByRegiones/{idRegion}', 'MunicipioController@municipiosByRegiones');
 
 
 Route::resources([
