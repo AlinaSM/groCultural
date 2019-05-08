@@ -59,6 +59,12 @@ Route::get('/estados/getAll', 'EstadoController@getAllElements');
 Route::get('/municipios/tablaMunicipiosByRegion/{idRegion}', 'MunicipioController@tablaMunicipiosByRegion');
 
 
+Route::get('/admin/lenguajes/asignar/{id}', 'LenguajeController@AsignarLugar');
+Route::get('/admin/religiones/asignar/{id}', 'ReligionController@AsignarLugar');
+Route::get('/admin/tradiciones/asignar/{id}', 'TradicionController@AsignarLugar');
+
+
+
 Route::resources([
     'usuarios'    =>  'UsuarioController',
     'admin'       =>  'LoginController',
