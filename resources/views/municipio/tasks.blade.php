@@ -9,7 +9,7 @@
 </h2>
 <br>
 <div class="container">
-        <a href="/municipios/create" class="btn tooltipped" data-position="bottom" data-tooltip="Modificar" >Agregar nueva region</a>
+        <a href="/municipios/create" class="btn tooltipped" data-position="bottom" data-tooltip="Modificar" >Agregar municipio</a>
 </div>
 <br><br>
 

@@ -50,8 +50,8 @@ class MunicipioController extends Controller
             <tr>
                 <th>id</th>
                 <th>Nombre</th>
-                <th>Nombre</th>
                 <th>Clima</th>
+                <th>No. Habitantes</th>
                 <th>Operaciones</th>
             </tr>
         </thead> <tbody>";
@@ -157,6 +157,11 @@ class MunicipioController extends Controller
     public function edit($id)
     {
         session_start();
+        $municipio = Municipio::where( 'id_municipio', $id )->get()[0];
+        $region    = Region::where( 'id_region', $municipio->id_region )->get()[0];
+        $estado    = Estado::where( 'id_estado', $region->id_estado )->get()[0];
+
+        return view('municipio.edit',compact('municipio', 'region', 'estado'));
     }
 
     /**
@@ -169,6 +174,39 @@ class MunicipioController extends Controller
     public function update(Request $request, $id)
     {
         session_start();
+        $municipio = Municipio::find($id);
+        
+        $municipio->nombre = $request->input('nombre'); 
+        $municipio->clima = $request->input('clima'); 
+        $municipio->numero_habitantes = $request->input('numero_habitantes'); 
+        $municipio->historia_general = $request->input('historia_general'); 
+     
+        if($request->input('Region')){
+            $municipio->id_region = $request->input('Region'); 
+        }
+
+        if($request->hasFile('mapa')){
+            
+            \File::delete( public_path(). $municipio->mapa );
+            $file = $request->file('mapa');
+            $name = time().$file->getClientOriginalName();
+            $municipio->mapa = '/images/mapas/'.$name;
+            $file->move(public_path('/images/mapas'), $name);
+        }
+
+                
+        if($request->hasFile('escudo')){
+            \File::delete( public_path(). $municipio->escudo );
+            $file = $request->file('escudo');
+            $name = time().$file->getClientOriginalName();
+            $municipio->escudo = '/images/escudos/'.$name;
+            $file->move(public_path('/images/escudos'), $name);
+            
+        }
+        $municipio->save();
+
+        $op = 'Se ha modificado correctamente el registro';
+        return view('admin.confirmar', compact('op'));
     }
 
     /**
