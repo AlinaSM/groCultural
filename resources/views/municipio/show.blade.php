@@ -61,10 +61,10 @@
                         <div class="row">
                             <div class="col">
                                 Escudo <br>    
-                                <img style="width: 15em; " src={{ $municipio->escudo  }} >
+                                <img style="width: 15em; " src="{{ $municipio->escudo  }}" >
                                 <br><br>
                                 Estado <br>    
-                                <img style="width: 25em; " src={{ $municipio->mapa  }} >
+                                <img style="width: 25em; " src="{{ $municipio->mapa  }}" >
                             </div>
                         </div>
                     </div>
