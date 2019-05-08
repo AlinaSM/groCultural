@@ -73,6 +73,15 @@ class LenguajeController extends Controller
         return view('lenguaje.show',compact('lenguaje'));
     }
 
+
+    public function AsignarLugar( $id )
+    {
+        session_start();
+        $lenguaje  =  Lenguaje::where( 'id_lengua', $id )->get()[0];
+        return view('lenguaje.asignar', compact('lenguaje'));
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
