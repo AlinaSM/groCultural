@@ -7,7 +7,7 @@
     <title> Administracion del sitio GroCultural - @yield('title')</title>
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href=" {{ asset('css/materialize.min.css') }}"> 
+    <link rel="stylesheet" href=" {{ asset('css/admin/materialize.min.css') }}"> 
     <link rel="stylesheet" href=" {{ asset('css/style.css') }}"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
@@ -65,14 +65,10 @@
         @yield('content') 
     </main>
 
-
-   
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script> 
-
     
+
+    <script src="{{ asset('js/admin/jquery.min') }} "></script>
+    <script src="{{ asset('js/admin/materialize.min.js') }} "></script>
     <script src="{{ asset('js/main.js') }} "></script>
     <script src="{{ asset('js/materialize.js') }} "></script>
   </body>
