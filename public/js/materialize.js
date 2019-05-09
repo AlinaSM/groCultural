@@ -35,4 +35,3 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Tooltip.init(elems);
   });
 
-  
