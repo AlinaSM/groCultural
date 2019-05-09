@@ -3,6 +3,7 @@
 namespace GroCultural\Http\Controllers;
 
 use GroCultural\Lenguaje;
+use GroCultural\MunicipioHasLenguaje;
 use Illuminate\Http\Request;
 
 class LenguajeController extends Controller
@@ -35,6 +36,32 @@ class LenguajeController extends Controller
         //
         session_start();
         return view('lenguaje.create');
+    }
+
+    public function coleccionDeLugares( $id ){
+       // $region = Region::where('id_estado', 1)->get();
+
+       
+        return "<h1>holallalalalala</h1>";
+        
+
+    }
+
+
+    public function asignarUnLugar($idLenguaje, $idMunicipio){
+        $listadepares = MunicipioHasLenguaje::where( 'id_lengua' , $idLenguaje )->where( 'id_municipio' , $idMunicipio )->get();
+
+        if( count($listadepares) == 0 ) {
+            $municipio_has_lenguaje = new MunicipioHasLenguaje();
+
+            $municipio_has_lenguaje->id_lengua    = $idLenguaje; 
+            $municipio_has_lenguaje->id_municipio = $idMunicipio; 
+
+            $municipio_has_lenguaje->save();
+        }
+       
+        return "Ya esta registrado";
+        
     }
 
     /**
@@ -74,7 +101,7 @@ class LenguajeController extends Controller
     }
 
 
-    public function AsignarLugar( $id )
+    public function asignarLugarView( $id )
     {
         session_start();
         $lenguaje  =  Lenguaje::where( 'id_lengua', $id )->get()[0];

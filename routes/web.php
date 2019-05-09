@@ -62,10 +62,14 @@ Route::get('/municipios/tablaMunicipiosByRegion/{idRegion}', 'MunicipioControlle
 Route::get('/municipios/getByRegiones/{idRegion}', 'MunicipioController@municipiosByRegiones');
 
 
-Route::get('/admin/lenguajes/asignar/{id}', 'LenguajeController@AsignarLugar');
-Route::get('/admin/religiones/asignar/{id}', 'ReligionController@AsignarLugar');
-Route::get('/admin/tradiciones/asignar/{id}', 'TradicionController@AsignarLugar');
+Route::get('/admin/lenguajes/asignar/{id}', 'LenguajeController@asignarLugarView');
+Route::get('/admin/religiones/asignar/{id}', 'ReligionController@asignarLugarView');
+Route::get('/admin/tradiciones/asignar/{id}', 'TradicionController@asignarLugarView');
 
+Route::get('/admin/lenguajes/coleccionDeLugares/{id}', 'LenguajeController@coleccionDeLugares');
+
+
+Route::get('/asignarlenguajes/lenguaje/{idLenguaje}/municipio/{idMunicipio}', 'LenguajeController@asignarUnLugar');
 
 
 Route::resources([

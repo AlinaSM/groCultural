@@ -1,12 +1,17 @@
 $(document).ready(function(){
-  $('#idEstado').val(0);
 
+  $('#agregarMunicipioLenguaje.waves-effect.waves-light.btn').click(function(){
+    altaDeMunicipioHasLenguaje();
+  });
+
+
+  $('#idEstado').val(0);
+   
   recargarTablaDeRegionesByEstado();
   recargarSelectConEstados();
   recargarSelectConRegiones();
   recargarSelectConTiposSitios();
   recargarSelectConMunicipiosByRegiones();
-  //recargarTablaDeMunicipiosByRegiones();
 
 
   $('#idEstado').change(function(){
@@ -14,11 +19,15 @@ $(document).ready(function(){
     recargarSelectConRegiones();
   });
 
+ 
+
   $('#selectRegionesByEstado').change(function(){
     recargarSelectConMunicipiosByRegiones();
     recargarTablaDeMunicipiosByRegiones();
   });
 
+
+  coleccionMunicipioHasLenguajes();
 
 });
 
@@ -136,6 +145,32 @@ function recargarSelectConMunicipiosByRegiones(){
       }	
       $("#selectMunicipiosByRegiones").material_select();
     
+    }
+  });
+}
+
+
+function altaDeMunicipioHasLenguaje(){
+  let idLenguaje = $('#idLenguaje').val();
+  let idMunicipio = $('#selectMunicipiosByRegiones').val();
+
+  $.ajax({
+    type: "GET",
+    url: "/asignarlenguajes/lenguaje/"+ idLenguaje +"/municipio/"+idMunicipio,
+    success:function(r){
+      alert(r);
+    }
+  });
+}
+
+function coleccionMunicipioHasLenguajes(){
+  let idLengua = $('#idLenguaje').val();
+  $.ajax({
+    type: "GET",
+    url: "/admin/lenguajes/coleccionDeLugares/"+ $idLengua,
+    success:function(r){
+      alert(idLengua);
+      //$('#prueba').html(r);
     }
   });
 }
