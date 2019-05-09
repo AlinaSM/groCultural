@@ -15,8 +15,8 @@ class RegionController extends Controller
      */
     public function index()
     {
-        $region = Region::all();
-        return view('region.index', compact('region'));
+        $regiones = Region::where('id_estado' , 1)->where( 'disponibilidad', 'Disponible' )->get();
+        return view('region.index', compact('regiones'));
     }
 
     public function tasks() 
