@@ -99,12 +99,14 @@
 </script>
 
     <div class="section white">
-        <div class="row container">
-            <h2 class="header">Conoce los municipios del estado</h2>
-            <p>Elige una region</p> 
+        <div class="row ">
+            <div class="col offset-s1">
+                <h2 class="header">Conoce los municipios del estado</h2>
+                <p>Elige una region</p> 
                 @foreach ($regiones as $region)
                     <button class="waves-effect waves-light btn-large boton" id="boton" value="{{$region->id_region}}" >{{ $region->nombre }}</button>
                 @endforeach
+            </div>
         </div>
         <div class="row" id="mostrarMunicipios"></div>
 
