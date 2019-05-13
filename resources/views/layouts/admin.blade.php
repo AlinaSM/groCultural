@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -64,13 +61,12 @@
     <main class= @isset($_SESSION['status'])  {{'mainBar'}}  @endisset>
         @yield('content') 
     </main>
+ 
 
-    
-
-    <script src="{{ asset('js/admin/jquery.min') }} "></script>
+    <script src="{{ asset('js/admin/jquery.min.js') }} "></script>
     <script src="{{ asset('js/admin/materialize.min.js') }} "></script>
+    
     <script src="{{ asset('js/main.js') }} "></script>
     <script src="{{ asset('js/materialize.js') }} "></script>
   </body>
 </html>
-      

@@ -17,8 +17,8 @@ class MunicipioController extends Controller
      */
     public function index()
     {
-        //
-        return view('municipio.index');
+        $regiones = Region::where('disponibilidad', 'Disponible')->get();
+        return view('municipio.index', compact('regiones'));
     }
 
     public function tasks() 
@@ -39,6 +39,20 @@ class MunicipioController extends Controller
 
         echo json_encode($arrayElements);
     }
+
+
+    public function getAllInformation( $id ){
+        $municipios = Municipio::where( 'id_municipio', $id )->where( 'disponibilidad', 'Disponible' )->get();
+
+        $arrayElements = array();
+        foreach($municipios as $municipio){
+            array_push($arrayElements, array( 'id' => $municipio->id_municipio , 
+                                              'municipio' => $municipio->nombre ) );   
+        }
+
+        echo json_encode($municipios);//json_encode($arrayElements);
+    }
+
 
     public function tablaMunicipiosByRegion( $idRegion ){
         session_start();
