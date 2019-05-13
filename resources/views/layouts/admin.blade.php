@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -73,4 +70,3 @@
     <script src="{{ asset('js/materialize.js') }} "></script>
   </body>
 </html>
-      
