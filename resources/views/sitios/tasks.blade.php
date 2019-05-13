@@ -5,7 +5,7 @@
 @section('content')
 
 <h2>
-    Operaciones de sistios de interes
+    Operaciones de sitios de interes
 </h2>
 <br>
 <div class="container">
@@ -23,7 +23,7 @@
         
     </div>
 
-    <div id="mostrarTablaMunicipios"></div>
+    <div id="mostrarTablaSitios"></div>
     
   
 @endsection

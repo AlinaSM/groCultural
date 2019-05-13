@@ -2,6 +2,7 @@
 
 namespace GroCultural\Http\Controllers;
 
+use GroCultural\Tradicion;
 use Illuminate\Http\Request;
 
 class TradicionController extends Controller
@@ -15,6 +16,13 @@ class TradicionController extends Controller
     {
         //
         return view('tradicion.index');
+    }
+
+    public function tasks() 
+    { 
+        session_start();
+        $tradiciones = Tradicion::where( 'disponibilidad', 'Disponible' )->get();
+        return view('tradicion.tasks', compact('tradiciones'));
     }
 
     /**
