@@ -58,6 +58,7 @@ Route::get('/regiones/regionesByEstado/{id}', 'RegionController@regionesByEstado
 Route::get('/estados/getAll', 'EstadoController@getAllElements');
 Route::get('/tipositios/getAll', 'TipoSitioInteresController@getAllElements');
 
+Route::get('/sitios/tablaMostrarTasks/{id}', 'SitioInteresController@tablaSitiosDeInteresByTipo');
 Route::get('/municipios/tablaMunicipiosByRegion/{idRegion}', 'MunicipioController@tablaMunicipiosByRegion');
 Route::get('/municipios/getByRegiones/{idRegion}', 'MunicipioController@municipiosByRegiones');
 Route::get('/municipios/getAllInformation/{id}', 'MunicipioController@getAllInformation');

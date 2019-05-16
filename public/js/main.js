@@ -6,7 +6,8 @@ $(document).ready(function(){
 
 
   $('#idEstado').val(0);
-   
+  $('#idTipoSitio').val(0);
+
   recargarTablaDeRegionesByEstado();
   recargarSelectConEstados();
   recargarSelectConRegiones();
@@ -17,6 +18,10 @@ $(document).ready(function(){
   $('#idEstado').change(function(){
     recargarTablaDeRegionesByEstado();
     recargarSelectConRegiones();
+  });
+
+  $('#idTipoSitio').change(function(){
+    recargarTablaSitios();
   });
 
  
@@ -57,6 +62,18 @@ function recargarTablaDeMunicipiosByRegiones(){
       }
 
   })
+}
+
+
+function recargarTablaSitios(){
+  let valor = $('#idTipoSitio').val();
+  $.ajax({
+    type: 'GET',
+    url: '/sitios/tablaMostrarTasks/'+valor,
+    success:function(response){
+      $('#mostrarTablaSitios').html(response);
+    }
+  });
 }
 
 function recargarSelectConTiposSitios(){
