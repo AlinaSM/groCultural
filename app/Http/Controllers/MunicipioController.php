@@ -89,6 +89,23 @@ class MunicipioController extends Controller
 
     } 
 
+    public function listadoDeMunicipiosClasificadoPorRegiones(){
+        $regiones   =  Region::where( 'id_estado', 1 )->where( 'disponibilidad', 'Disponible' )->get();
+        $municipios =  Municipio::where( 'disponibilidad', 'Disponible' )->get();
+        
+        $diccionarioMunicipios = array();
+        foreach ($regiones as $region){
+            $diccionarioMunicipios["$region->nombre"] = array();
+            foreach($municipios as $municipio){
+                if( $region->id_region == $municipio->id_region ){
+                    array_push( $diccionarioMunicipios["$region->nombre"], "$municipio->nombre" );
+                }
+            }
+        }
+
+       return $diccionarioMunicipios;
+    }
+
 
     /**
      * Show the form for creating a new resource.
