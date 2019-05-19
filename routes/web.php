@@ -62,6 +62,7 @@ Route::get('/sitios/tablaMostrarTasks/{id}', 'SitioInteresController@tablaSitios
 Route::get('/municipios/tablaMunicipiosByRegion/{idRegion}', 'MunicipioController@tablaMunicipiosByRegion');
 Route::get('/municipios/getByRegiones/{idRegion}', 'MunicipioController@municipiosByRegiones');
 Route::get('/municipios/getAllInformation/{id}', 'MunicipioController@getAllInformation');
+Route::get('/municipios/allFromAllRegiones/', 'MunicipioController@listadoDeMunicipiosClasificadoPorRegiones');
 
 
 Route::get('/admin/lenguajes/asignar/{id}', 'LenguajeController@asignarLugarView');
