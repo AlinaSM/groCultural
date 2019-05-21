@@ -30,7 +30,12 @@ class SitioInteresController extends Controller
         return view('sitios.tasks');
     }
 
-   
+    public function escenarioVr() 
+    { 
+        session_start();
+     
+        return view('sitios.vrEscenario');
+    }
 
     /**
      * Show the form for creating a new resource.

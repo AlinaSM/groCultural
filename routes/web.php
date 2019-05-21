@@ -53,6 +53,7 @@ Route::get('/admin/municipios/destroy/{id}', 'MunicipioController@destroy');
 Route::get('/admin/sitios/destroy/{id}', 'SitioInteresController@destroy');
 
 
+Route::get('/sitios/vr-sitio/', 'SitioInteresController@escenarioVr');
 Route::get('/regiones/tablaRegionesByEstado/{id}', 'RegionController@tablaRegionesByEstado');
 Route::get('/regiones/regionesByEstado/{id}', 'RegionController@regionesByEstado');
 Route::get('/estados/getAll', 'EstadoController@getAllElements');
