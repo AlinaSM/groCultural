@@ -19,8 +19,8 @@ class SitioInteresController extends Controller
      */
     public function index()
     {
-        //
-        return view('sitios.index');
+        $regiones = Region::where('disponibilidad', 'Disponible')->get();
+        return view('sitios.index', compact('regiones') );
     }
 
     public function tasks() 
