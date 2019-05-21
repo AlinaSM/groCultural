@@ -1,5 +1,3 @@
-
-
 <script src="{{ asset('js/aframe.min.js') }}"></script>
 
 <a-scene>
