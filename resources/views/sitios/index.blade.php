@@ -4,6 +4,88 @@
 
 @section('content')
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+
+
+    function elegirRegion(id){
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'text';
+        xhr.open("GET","/municipios/getByRegiones/"+id,true);
+        xhr.send();
+    
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                let municipios = JSON.parse(xhr.responseText);
+                ingresarSelect(municipios);
+            }
+        }
+    }
+
+    function elegirMunicipio(id){
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'text';
+        xhr.open("GET","/municipios/getAllInformation/"+id,true);
+        xhr.send();
+    
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                let municipio = JSON.parse(xhr.responseText)[0];
+               // mostrarInfoMunicipio( municipio );
+            }
+        }
+    }
+
+  
+
+    function ingresarSelect(datos){
+        document.getElementById('mostrarInformacionMunicipio').innerHTML = '';
+        let elementoTag = document.getElementById('mostrarMunicipios');
+        let codigoHTML = '';
+        if(datos.length != 0){
+            codigoHTML = '<div class="col offset-s1 s10">  ';
+            for(let i = 0; i < datos.length; i++){                
+                codigoHTML += ' <button class="waves-effect waves-light orange darken-4 btn" value="'+ datos[i]['id'] +'" id="municipio">'+ datos[i]['municipio'] +'</button> ';
+            }
+            codigoHTML += '</div>';
+
+        }else{
+            
+            M.toast({html: 'No hay municipios en esta region!',classes: 'rounded' })
+        }
+        elementoTag.innerHTML = codigoHTML;
+        habilitarBotonesMunicipios();
+    }
+
+
+   document.addEventListener("DOMContentLoaded", function(){
+        var botonesRegiones = document.querySelectorAll('#boton');
+        for(botonRegion of botonesRegiones){
+            botonRegion.addEventListener('click', function (evt){
+                let elementoSeleccionado = evt.target;
+               elegirRegion(elementoSeleccionado.value);
+            });
+        }
+    });
+  
+
+
+    function habilitarBotonesMunicipios(){
+        var botonesMunicipios = document.querySelectorAll('#municipio');
+        for(botonMunicipio of botonesMunicipios){
+            botonMunicipio.addEventListener('click', function (evt){
+                let elementoSeleccionado = evt.target;
+                //elegirMunicipio(elementoSeleccionado.value);
+            });
+        }
+    }
+
+</script>
+
+
 
     <div class="container">
         <h1>Sitio de Interes en Guerrero</h1>
@@ -57,6 +139,6 @@
         <div class="parallax"><img src="{{ asset('images/guerrerense01.jpg') }}"></div>
     </div>
     
+            
 
-    
 @endsection

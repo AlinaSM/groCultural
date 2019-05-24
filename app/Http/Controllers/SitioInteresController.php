@@ -19,8 +19,10 @@ class SitioInteresController extends Controller
      */
     public function index()
     {
+
         $tiposSitios  = TipoSitioInteres::where( 'disponibilidad', 'Disponible' )->get();
         return view('sitios.index', compact('tiposSitios'));
+
     }
 
     public function tasks() 
