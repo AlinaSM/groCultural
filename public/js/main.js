@@ -9,32 +9,40 @@ $(document).ready(function(){
     altaDeMunicipioHasLenguaje();
   });
 
+  $('.userMostrarSitio').click(function(){
+    console.log('El valor es: ' + $('#userMostrarSitio').val() );
+  });
+
   $('#buscarFiltroSitios').click(function(){
-    let valorTipo;
-    let valorLugarMunicipio;
+    let valorTipo = $('#idTipoSitio').val();
+    var valorLugarMunicipio = $('#selectMunicipiosByRegiones').val();
     //Se hara la consulta para buscar
     if( $('#checkTipo').is(':checked') && $('#checkLugar').is(':checked') ){
+      console.log('los dos');
       $.ajax({
         type: "GET",
         url: "/sitios/mostrarSitios/tipo/"+ valorTipo +"/municipio/"+ valorLugarMunicipio,    
         success : function(r){
-            $('#').html(r);
+            $('#mostrarResultado').html(r);
         }
       });
     }else if( $('#checkTipo').is(':checked') ){
+      ;
       $.ajax({
         type: "GET",
         url: "/sitios/mostrarSitios/tipo/"+ valorTipo,    
         success : function(r){
-            $('#').html(r);
+          console.log(r);
+            $('#mostrarResultado').html(r);
         }
       });
     } else if( $('#checkLugar').is(':checked') ){
+      console.log('los lugar');
       $.ajax({
         type: "GET",
         url: "/sitios/mostrarSitios/municipio/"+ valorLugarMunicipio,    
         success : function(r){
-            $('#').html(r);
+            $('#mostrarResultado').html(r);
         }
       });
     } 

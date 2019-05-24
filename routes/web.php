@@ -52,8 +52,12 @@ Route::get('/admin/lenguajes/destroy/{id}', 'LenguajeController@destroy');
 Route::get('/admin/municipios/destroy/{id}', 'MunicipioController@destroy');
 Route::get('/admin/sitios/destroy/{id}', 'SitioInteresController@destroy');
 
+Route::get('/sitios/sitio/{id}', 'SitioInteresController@infoSitio');
+Route::get('/sitios/mostrarSitios/tipo/{idTipo}', 'SitioInteresController@userSitiosDeInteresByTipo');
+Route::get('/sitios/mostrarSitios/municipio/{idMunicipio}', 'SitioInteresController@userSitiosDeInteresByLugar');
+Route::get('/sitios/mostrarSitios/tipo/{idTipo}/municipio/{idMunicipio}', 'SitioInteresController@userSitiosDeInteresByLugarAndTipo');
 
-Route::get('/sitios/vr-sitio/', 'SitioInteresController@escenarioVr');
+Route::get('/sitios/vr-sitio/5', 'SitioInteresController@escenarioVr');
 Route::get('/regiones/tablaRegionesByEstado/{id}', 'RegionController@tablaRegionesByEstado');
 Route::get('/regiones/regionesByEstado/{id}', 'RegionController@regionesByEstado');
 Route::get('/estados/getAll', 'EstadoController@getAllElements');
