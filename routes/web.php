@@ -53,7 +53,7 @@ Route::get('/admin/municipios/destroy/{id}', 'MunicipioController@destroy');
 Route::get('/admin/sitios/destroy/{id}', 'SitioInteresController@destroy');
 
 Route::get('/sitios/sitio/{id}', 'SitioInteresController@infoSitio');
-
+ 
 Route::get('/tradiciones/tradicion/{id}', 'TradicionController@infoTradicion');
 
 
