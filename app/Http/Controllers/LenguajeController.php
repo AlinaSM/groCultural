@@ -16,7 +16,8 @@ class LenguajeController extends Controller
     public function index()
     {
         //
-        return view('lenguaje.index');
+        $lenguajes = Lenguaje::where( 'disponibilidad', 'Disponible' )->get();
+        return view('lenguaje.index',compact('lenguajes'));
     }
 
     public function tasks() 
@@ -45,6 +46,17 @@ class LenguajeController extends Controller
         return "<h1>holallalalalala</h1>";
         
 
+    }
+
+    public function getInfo( $id ){
+        $lenguajes = Lenguaje::where( 'id_lengua', $id )->where( 'disponibilidad', 'Disponible' )->get();
+
+        $arrayElements = array();
+        foreach($lenguajes as $lenguaje){
+            array_push($arrayElements, array( 'id' => $lenguaje->id_lengua , 'lenguaje' => $lenguaje->nombre , 'descripcion' => $lenguaje->descripcion ) );   
+        }
+
+        echo json_encode($arrayElements);
     }
 
 
