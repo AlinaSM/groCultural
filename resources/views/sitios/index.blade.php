@@ -132,7 +132,11 @@
         </div>
         <button class="waves-effect waves-light btn" id="buscarFiltroSitios">Buscar</button>
 
+        <div class="row">
 
+            <div id="mostrarResultado"></div>
+            
+        </div>
 
     </div>
     <div class="parallax-container">
