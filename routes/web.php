@@ -62,7 +62,10 @@ Route::get('/regiones/tablaRegionesByEstado/{id}', 'RegionController@tablaRegion
 Route::get('/regiones/regionesByEstado/{id}', 'RegionController@regionesByEstado');
 Route::get('/estados/getAll', 'EstadoController@getAllElements');
 Route::get('/tipositios/getAll', 'TipoSitioInteresController@getAllElements');
+Route::get('/tipotradicion/getAll', 'TipoTradicionController@getAllElements');
 
+
+Route::get('/tradiciones/tablaMostrarTasks/{id}', 'TradicionController@tablaTradicionesByTipo');
 Route::get('/sitios/tablaMostrarTasks/{id}', 'SitioInteresController@tablaSitiosDeInteresByTipo');
 Route::get('/municipios/tablaMunicipiosByRegion/{idRegion}', 'MunicipioController@tablaMunicipiosByRegion');
 Route::get('/municipios/getByRegiones/{idRegion}', 'MunicipioController@municipiosByRegiones');
@@ -76,8 +79,10 @@ Route::get('/admin/tradiciones/asignar/{id}', 'TradicionController@asignarLugarV
 
 Route::get('/admin/lenguajes/coleccionDeLugares/{id}', 'LenguajeController@coleccionDeLugares');
 
+Route::get('/admin/tradiciones/getMunicipios/{id}', 'TradicionController@tablaMunicipios');
 
 Route::get('/asignarlenguajes/lenguaje/{idLenguaje}/municipio/{idMunicipio}', 'LenguajeController@asignarUnLugar');
+Route::get('/asignartradicion/tradicion/{idTradicion}/municipio/{idMunicipio}', 'TradicionController@asignarUnLugar');
 
 
 Route::resources([

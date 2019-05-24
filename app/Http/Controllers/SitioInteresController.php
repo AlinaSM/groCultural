@@ -136,10 +136,6 @@ class SitioInteresController extends Controller
         session_start();
         
         $sitios = SitioInteres::where( 'id_tipo_interes', $id )->where( 'disponibilidad', 'Disponible' )->get();
-
-        //$sitio = SitioInteres::where( 'id_interes_cult', $id )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        
-        
         
         $cadena = "<table>
         <thead>

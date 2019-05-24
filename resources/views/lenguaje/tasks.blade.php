@@ -30,7 +30,7 @@
                         <td>{{ $lenguaje->id_lengua }}</td>
                         <td>{{ $lenguaje->nombre  }}</td>              
                         <td> 
-                                <a href="/admin/lenguajes/asignar/{{ $lenguaje->id_lengua }}" class="btn tooltipped blue" data-position="bottom" data-tooltip="Asignar"><small >Asignar lugar</small></a>
+                            <a href="/admin/lenguajes/asignar/{{ $lenguaje->id_lengua }}" class="btn tooltipped blue" data-position="bottom" data-tooltip="Asignar"><small >Asignar lugar</small></a>
                             <a href="/lenguajes/{{ $lenguaje->id_lengua }}/edit" class="btn tooltipped" data-position="bottom" data-tooltip="Modificar"><i class="material-icons">cached</i></a>
                             <a href="/admin/lenguajes/show/{{ $lenguaje->id_lengua }}" class="btn tooltipped red darken-4" data-position="bottom" data-tooltip="Eliminar"><i class="material-icons">delete_forever</i></a>
                         </td>
