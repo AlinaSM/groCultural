@@ -1,8 +1,75 @@
 $(document).ready(function(){
 
+  $('.divLugares').hide();
+  $('.divTipoSitios').hide();
+  $('#buscarFiltroSitios').hide();
+
+
   $('#agregarMunicipioLenguaje.waves-effect.waves-light.btn').click(function(){
     altaDeMunicipioHasLenguaje();
   });
+
+  $('#buscarFiltroSitios').click(function(){
+    let valorTipo;
+    let valorLugarMunicipio;
+    //Se hara la consulta para buscar
+    if( $('#checkTipo').is(':checked') && $('#checkLugar').is(':checked') ){
+      $.ajax({
+        type: "GET",
+        url: "/sitios/mostrarSitios/tipo/"+ valorTipo +"/municipio/"+ valorLugarMunicipio,    
+        success : function(r){
+            $('#').html(r);
+        }
+      });
+    }else if( $('#checkTipo').is(':checked') ){
+      $.ajax({
+        type: "GET",
+        url: "/sitios/mostrarSitios/tipo/"+ valorTipo,    
+        success : function(r){
+            $('#').html(r);
+        }
+      });
+    } else if( $('#checkLugar').is(':checked') ){
+      $.ajax({
+        type: "GET",
+        url: "/sitios/mostrarSitios/municipio/"+ valorLugarMunicipio,    
+        success : function(r){
+            $('#').html(r);
+        }
+      });
+    } 
+
+  });
+
+  $('#checkLugar').change(function() {
+    if(this.checked != true){
+      $('.divLugares').hide(1000);
+      console.log('off');
+    }else{
+      $('.divLugares').show(1000);
+      console.log('on');
+    }
+    estadoFiltroSitios ()
+  });
+
+  $('#checkTipo').change(function() {
+    if(this.checked != true){
+      $('.divTipoSitios').hide(1000);
+      console.log('estado: '+$('#checkTipo').is(':checked'));
+    }else{
+      $('.divTipoSitios').show(700);
+      console.log('estado: '+$('#checkTipo').is(':checked'));
+    }
+    estadoFiltroSitios () 
+  });
+
+  function estadoFiltroSitios (){
+    if($('#checkTipo').is(':checked') || $('#checkLugar').is(':checked')){
+      $('#buscarFiltroSitios').show();
+    }else{
+      $('#buscarFiltroSitios').hide();
+    }
+  }
 
 
   $('#idEstado').val(0);
@@ -121,8 +188,28 @@ function recargarSelectConEstados(){
   });
 }
 
+function recargarSelectConTiposDeSitios(){
+  let valor = $('#selectTiposSitios').val();
+  $.ajax({
+    type:"GET",
+    url:"/sitios/getAllSitiosByTipo/" + valor,
+    success:function(r){
+     
+      $("#selectRegionesByEstado").material_select();
+    
+    }
+  });
+
+}
+
 function recargarSelectConRegiones(){
-  let valor = $('#idEstado').val();
+  let valor;
+  if($('#idEstado').val()){
+    valor = $('#idEstado').val();
+  }else{
+    valor = 1;
+  }
+  
   $.ajax({
     type:"GET",
     url:"/regiones/regionesByEstado/" + valor,

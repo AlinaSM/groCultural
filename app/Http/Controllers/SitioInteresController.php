@@ -19,8 +19,10 @@ class SitioInteresController extends Controller
      */
     public function index()
     {
-        $regiones = Region::where('disponibilidad', 'Disponible')->get();
-        return view('sitios.index', compact('regiones') );
+
+        $tiposSitios  = TipoSitioInteres::where( 'disponibilidad', 'Disponible' )->get();
+        return view('sitios.index', compact('tiposSitios'));
+
     }
 
     public function tasks() 
@@ -28,6 +30,22 @@ class SitioInteresController extends Controller
         session_start();
      
         return view('sitios.tasks');
+    }
+
+    public function mostrarSitiosByMunicipio($idMunicipio){
+        $sitios = SitioInteres::where( 'id_municipio', $idMunicipio )->where( 'disponibilidad', 'Disponible' )->get();
+        $tipos = TipoSitioInteres::where( 'disponibilidad', 'Disponible' )->get();
+       
+        $cadenaHTML = "<div class='collection'>";
+
+
+        foreach($sitios as $sitio){
+            $cadenaHTML += "<a href='#!' class='collection-item'>$sitio->nombre     </a>  ";
+        }
+
+
+        $cadenaHTML += " </div> ";
+
     }
 
     public function escenarioVr() 

@@ -85,57 +85,60 @@
 
 </script>
 
-    <div class="section white">
-        <div class="row ">
-            <div class="col offset-s1">
-                <h2 class="header">Sitios de Interes en el estado</h2>
-                <p>Elige una region</p> 
-                @foreach ($regiones as $region)
-                    <button class="waves-effect waves-light btn-large boton" id="boton" value="{{$region->id_region}}" >{{ $region->nombre }}</button>
-                @endforeach
-            </div>
-        </div>
-        <div class="row" id="mostrarMunicipios"></div>
 
-         <!-- Dropdown Trigger -->
-        <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Tipos de Sitios!</a>
 
-        <!-- Dropdown Structure -->
-        <ul id='dropdown1' class='dropdown-content'>
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
-        </ul>
+    <div class="container">
+        <h1>Sitio de Interes en Guerrero</h1>
+        <div class="row">
+           <div class="col">
+                Buscar por:
+            <p>
+            <label>
+                <input type="checkbox" id="checkLugar"/>
+                <span>Lugar</span>
+            </label>
+            </p>
+            <p>
+            <label>
+                <input type="checkbox" id="checkTipo"/>
+                <span>Tipo</span>
+            </label>
 
-        <div class="input-field col s12">
-            <select>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-            <label>Materialize Select</label>
-          </div>
-
-          
-          <div class="row">
-            <div class="input-field col offset-s1 s4">
-                <select name="Estado" id="idEstado"></select>
-                <label>Estado:</label>
-            </div>
-    
-            <div class="input-field col offset-s1 s4">
-                <select name="Region" id="selectRegionesByEstado"></select>
-                <label>Regiones:</label>
-            </div>
-        </div>
-
-        <div class="row" id="mostrarInformacionMunicipio"></div>
-    </div> 
             
-    <div class="parallax-container">
-        <div class="parallax"><img src="{{ asset('images/calle_en_taxco.jpg') }}"></div>
-    </div>
+            </p>
+           </div>
+        </div>
+        <div class="row">
+            
+            <div class="divLugares">
+                <div class="input-field col offset-s1 s3">
+                    <select name="Region" id="selectRegionesByEstado" required></select>
+                    <label>Regiones:</label>
+                </div>
+    
+                <div class="input-field col s3">
+                    <select name="Municipio" id="selectMunicipiosByRegiones" required></select>
+                    <label>Municipios:</label>
+                </div>
+            </div>
 
-       
+            <div class="divTipoSitios">
+                <div class="input-field offset-s1 col s3">
+                    <select name="tipo" id="idTipoSitio" required></select>
+                    <label>Tipo de Interes:</label>
+                </div>
+            </div>
+            
+        </div>
+        <button class="waves-effect waves-light btn" id="buscarFiltroSitios">Buscar</button>
+
+
+
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="{{ asset('images/guerrerense01.jpg') }}"></div>
+    </div>
+    
+            
 
 @endsection
