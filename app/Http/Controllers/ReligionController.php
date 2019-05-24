@@ -15,7 +15,8 @@ class ReligionController extends Controller
     public function index()
     {
         //
-        return view('religion.index');
+        $religiones = Religion::where( 'disponibilidad', 'Disponible' )->get();
+        return view('religion.index', compact('religiones'));
     }
 
     public function tasks() 
@@ -33,6 +34,17 @@ class ReligionController extends Controller
     {
         session_start();
         return view('religion.create');
+    }
+
+    public function getInfo( $id ){
+        $lenguajes = Religion::where( 'id_religion', $id )->where( 'disponibilidad', 'Disponible' )->get();
+
+        $arrayElements = array();
+        foreach($lenguajes as $lenguaje){
+            array_push($arrayElements, array( 'id' => $lenguaje->id_religion , 'religion' => $lenguaje->nombre , 'descripcion' => $lenguaje->descripcion ) );   
+        }
+
+        echo json_encode($arrayElements);
     }
 
     /**

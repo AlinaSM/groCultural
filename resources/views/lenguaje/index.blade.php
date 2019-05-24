@@ -79,7 +79,7 @@
         <div class="row ">
             <div class="col offset-s1">
                 <h2 class="header">Lenguajes del estado</h2>
-                <p>Elige una region</p> 
+                <p>Elige:</p> 
                 @foreach ($lenguajes as $lenguaje)
                     <button class="waves-effect waves-light btn-large boton" id="boton" value="{{$lenguaje->id_lengua}}" >{{ $lenguaje->nombre }}</button>
                 @endforeach
