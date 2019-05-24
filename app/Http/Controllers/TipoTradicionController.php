@@ -3,6 +3,9 @@
 namespace GroCultural\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GroCultural\Tradicion;
+use GroCultural\TipoTradicion;
+
 
 class TipoTradicionController extends Controller
 {
@@ -14,6 +17,17 @@ class TipoTradicionController extends Controller
     public function index()
     {
         //
+    }
+
+    public function getAllElements(){
+        $tipos = TipoTradicion::where( 'disponibilidad', 'Disponible' )->get();
+
+        $arrayElements = array();
+        foreach($tipos as $data){
+            array_push($arrayElements, array( 'id' => $data->id_tipo_tradicion , 'tipo' => $data->nombre ) );   
+        }
+
+        echo json_encode($arrayElements);
     }
 
     /**

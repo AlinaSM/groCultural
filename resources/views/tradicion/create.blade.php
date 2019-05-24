@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Creando Tradiciones')
 
@@ -13,7 +13,7 @@
                 <form class="col s12">
                   <div class="row">
                     <div class="input-field col s12">
-                      <input placeholder="Lengua..." id="tradiciones" name = "religion" type="text" class="validate">
+                      <input  name = "nombre" type="text" class="validate">
                       <label for="tradiciones">Nombre de la tradicion:</label>
                     </div>
                 </div>
@@ -21,24 +21,37 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea name="descripcion" class="materialize-textarea"></textarea>
-                        <label for="tradiciones">Descripcion de la religiones...</label>
+                        <label >Descripcion de la religiones...</label>
                         
                     </div>
                 </div>  
 
                 <div class="row">
                     <div class="input-field col s12">
-                      <input placeholder="fecha..." id="religion" name = "fecha_festejo" type="date" class="validate">
-                      <label for="tracicion">Fecha del festejo:</label>
+                      <input  name = "fecha_festejo" type="text" class="validate">
+                      <label >Fecha del festejo:</label>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s12">
-                      <input placeholder="Lengua..." id="religion" name = "religion" type="text" class="validate">
-                      <label for="religion">Tipo de tradicion:</label>
+                    <div class="input-field offset-s3 col s5">
+                        <select name="tipo" id="idTipoTradicion" required></select>
+                        <label>Tipo de Tradicion:</label>
                     </div>
                 </div>
+
+
+                <div class="row">
+                        <div class="file-field input-field col offset-s3 s5">
+                            <div class="btn">
+                                <span>Imagen</span>
+                                    <input type="file" name="imagen" required>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                   </div>
                      
                 <div class="row">
                     <div class="col offset-s4">

@@ -3,6 +3,11 @@
 namespace GroCultural\Http\Controllers;
 
 use GroCultural\Tradicion;
+use GroCultural\TipoTradicion;
+use GroCultural\Estado;
+use GroCultural\Region;
+use GroCultural\Municipio;
+use GroCultural\MunicipioHasTradicion;
 use Illuminate\Http\Request;
 
 class TradicionController extends Controller
@@ -18,12 +23,152 @@ class TradicionController extends Controller
         return view('tradicion.index');
     }
 
+
+    public function asignarLugarView( $id )
+    {
+        session_start();
+        $tradicion  =  Tradicion::where( 'id_tradicion', $id )->get()[0];
+       
+        return view('tradicion.asignar', compact('tradicion'));
+    }
+
+    public function asignarUnLugar($idTradicion, $idMunicipio){
+        $listadepares = MunicipioHasTradicion::where( 'id_tradicion' , $idTradicion )->where( 'id_municipio' , $idMunicipio )->get();
+
+        if( count($listadepares) == 0 ) {
+            $municipio_has_tradicion = new MunicipioHasTradicion();
+
+            $municipio_has_tradicion->id_tradicion    = $idTradicion; 
+            $municipio_has_tradicion->id_municipio = $idMunicipio; 
+
+            $municipio_has_tradicion->save();
+        }
+       
+        return "Ya esta registrado";
+    }
+
     public function tasks() 
     { 
         session_start();
         $tradiciones = Tradicion::where( 'disponibilidad', 'Disponible' )->get();
         return view('tradicion.tasks', compact('tradiciones'));
     }
+
+    public function tablaTradicionesByTipo($id) 
+    { 
+        session_start();
+        
+        $tradiciones = Tradicion::where( 'id_tipo_tradicion', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        
+        $cadena = "<table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nombre</th>
+                <th>Fechas</th>
+                <th>Tipo</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead> <tbody>";
+
+        foreach($tradiciones as $tradicion){
+
+            $tipo  = TipoTradicion::where( 'id_tipo_tradicion', $tradicion->id_tipo_tradicion)->where( 'disponibilidad', 'Disponible' )->get()[0];
+           
+        
+                $cadena = $cadena ."<tr>
+                    <td> $tradicion->id_tradicion </td>
+                    <td> $tradicion->nombre  </td>
+                    <td> $tradicion->fecha_festejo  </td>
+                    <td> $tipo->nombre  </td>
+                    <td> 
+                        <a href='/tradiciones/$tradicion->id_tradicion/edit' class='btn tooltipped' data-position='bottom' data-tooltip='Modificar'><i class='material-icons'>cached</i></a>
+                        <a href='/admin/tradiciones/show/$tradicion->id_tradicion' class='btn tooltipped red darken-4' data-position='bottom' data-tooltip='Eliminar'><i class='material-icons'>delete_forever</i></a>
+                        <a href='/admin/tradiciones/asignar/$tradicion->id_tradicion' class='btn tooltipped' data-position='bottom' data-tooltip='Asignar lugar'>Asignar</a>
+                    </td>
+                </tr> ";
+            
+            
+        }
+        
+        return $cadena . " </tbody> </table>";
+         
+    }
+    
+
+    public function tablaMunicipios($id) 
+    { 
+        session_start();
+        $listadepares = MunicipioHasTradicion::where( 'id_tradicion' , $id )->orderBy('id_municipio', 'desc')->get();
+
+        
+        $cadena = "<table>  <thead>  <tr>   <th>Municipio</th>  </tr>  </thead> <tbody>";
+
+        foreach($listadepares as $elemento){
+
+            $municipio  = Municipio::where( 'id_municipio', $elemento->id_municipio)->where( 'disponibilidad', 'Disponible' )->get()[0];
+            $cadena = $cadena ."<tr>   <td> $municipio->nombre </td> </tr> ";
+        }
+        
+        return $cadena . " </tbody> </table>";
+      
+         
+    }
+
+    public function infoTradicion($id) 
+    { 
+        session_start();
+        
+        $tradicion = Tradicion::where( 'id_tradicion', $id )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $tipo  = TipoTradicion::where( 'id_tipo_tradicion', $tradicion->id_tipo_tradicion)->where( 'disponibilidad', 'Disponible' )->get()[0];
+        
+        
+        return view('tradicion.infoTradicion', compact('tradicion', 'tipo'));
+    }
+
+    
+    public function userTradicionByTipo($idTipo) 
+    { 
+        $tradiciones = Tradicion::where( 'id_tipo_tradicion', $idTipo )->where( 'disponibilidad', 'Disponible' )->get();
+        
+        $cadena = "<table> <thead> <tr> <th>Tradicion</th>  <td> </td> </tr> </thead> <tbody>";
+
+        foreach($tradiciones as $tradicion){
+            $cadena = $cadena ." <tr> <td>$tradicion->nombre</td>  <td> <a class='waves-effect waves-light btn' href='/tradiciones/tradicion/$tradicion->id_tradicion'  >Info</a>  </td>  </tr>";
+        }
+        
+        return $cadena . " </tbody> </table> ";
+    }
+
+    public function userTradicionByLugar($idMunicipio) 
+    { 
+        $tradiciones = Tradicion::where( 'id_municipio', $idMunicipio )->where( 'disponibilidad', 'Disponible' )->get();
+        $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Tipo</th>  <td> </td> </tr> </thead> <tbody>";
+
+        foreach($tradiciones as $tradicion){
+            $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
+        
+            if($sitio || $municipio || $region){
+                $cadena = $cadena ." <tr> <td>$sitio->nombre</td> <td>$tipo->nombre</td>  <td> <a class='waves-effect waves-light btn' href='/tradiciones/tradicion/$sitio->id_interes_cult'  >Info</a>  </td>  </tr>";
+            }
+            
+        }
+        
+        return $cadena . " </tbody> </table> ";
+    } 
+    
+    public function userTradicionByLugarAndTipo( $idTipo, $idMunicipio) 
+    { 
+        $tradiciones = Tradicion::where( 'id_municipio', $idMunicipio )->where( 'id_tipo_tradicion', $idTipo )->where( 'disponibilidad', 'Disponible' )->get();
+        $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Tipo</th>  <td> </td> </tr> </thead> <tbody>";
+
+        foreach($tradiciones as $tradicion){
+            $cadena = $cadena ." <tr> <td>$sitio->nombre</td> <td>$tipo->nombre</td>  <td> <a class='waves-effect waves-light btn' href='/tradiciones/tradicion/$sitio->id_interes_cult'  >Info</a>  </td>  </tr>";
+        }
+        
+        return $cadena . " </tbody> </table> ";
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,7 +177,9 @@ class TradicionController extends Controller
      */
     public function create()
     {
-        return view('tradicion.create');
+        session_start();
+        $tiposTradiciones = TipoTradicion::where( 'disponibilidad', 'Disponible' )->get();
+        return view('tradicion.create', compact('tiposTradiciones'));
     }
 
     /**
@@ -43,7 +190,28 @@ class TradicionController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        session_start();
+
+        if( $request->hasFile('imagen') ){
+            $fileMapa = $request->file('imagen');
+            $nameImagen = time().$fileMapa->getClientOriginalName();
+            $pathImagen = '/images/tradiciones';
+            $fileMapa->move(public_path($pathImagen), $nameImagen);
+        }
+
+        
+        $tradicion = new Tradicion();
+        
+        $tradicion->nombre = $request->input('nombre'); 
+        $tradicion->descripcion = $request->input('descripcion'); 
+        $tradicion->fecha_festejo = $request->input('fecha_festejo'); 
+        $tradicion->id_tipo_tradicion = $request->input('tipo');
+        $tradicion->imagen = $pathImagen . '/'.$nameImagen ; 
+        $tradicion->disponibilidad = "Disponible";
+
+        $tradicion->save();
+        $op = 'Se ha ingresado correctamente una nueva tradicion';
+        return view('admin.confirmar', compact('op'));
     }
 
     /**

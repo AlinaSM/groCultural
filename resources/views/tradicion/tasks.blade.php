@@ -15,12 +15,10 @@
 <br><br>
 
     <div class="row">
-        <div class="input-field col offset-s1 s4">
-            <select name="Tipo" id="idTipoTradiciones"></select>
-            <label>Tipos de Tradicion:</label>
+        <div class="input-field offset-s3 col s5">
+            <select name="tipo" id="idTipoTradicion" required></select>
+            <label>Tipo de Tradicion:</label>
         </div>
-
-        
     </div>
 
     <div id="mostrarTablaTradiciones"></div>

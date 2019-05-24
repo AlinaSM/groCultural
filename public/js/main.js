@@ -5,13 +5,23 @@ $(document).ready(function(){
   $('#buscarFiltroSitios').hide();
 
 
+  $('.divLugaresT').hide();
+  $('.divTipoTradiciones').hide();
+  $('#buscarFiltroTradiciones').hide();
+
+
   $('#agregarMunicipioLenguaje.waves-effect.waves-light.btn').click(function(){
     altaDeMunicipioHasLenguaje();
+  });
+
+  $('#agregarMunicipioTradicion.waves-effect.waves-light.btn').click(function(){
+    altaDeMunicipioHasTradicion();
   });
 
   $('.userMostrarSitio').click(function(){
     console.log('El valor es: ' + $('#userMostrarSitio').val() );
   });
+
 
   $('#buscarFiltroSitios').click(function(){
     let valorTipo = $('#idTipoSitio').val();
@@ -49,6 +59,44 @@ $(document).ready(function(){
 
   });
 
+
+
+  $('#buscarFiltroTradiciones').click(function(){
+    let valorTipo = $('#idTipoTradicion').val();
+    var valorLugarMunicipio = $('#selectMunicipiosByRegiones').val();
+    //Se hara la consulta para buscar
+    if( $('#checkTipoT').is(':checked') && $('#checkLugarT').is(':checked') ){
+      console.log('los dos');
+      $.ajax({
+        type: "GET",
+        url: "/tradiciones/mostrarTradiciones/tipo/"+ valorTipo +"/municipio/"+ valorLugarMunicipio,    
+        success : function(r){
+            $('#mostrarResultadoT').html(r);
+        }
+      });
+    }else if( $('#checkTipoT').is(':checked') ){
+      ;
+      $.ajax({
+        type: "GET",
+        url: "/tradiciones/mostrarTradiciones/tipo/"+ valorTipo,    
+        success : function(r){
+          console.log(r);
+            $('#mostrarResultadoT').html(r);
+        }
+      });
+    } else if( $('#checkLugarT').is(':checked') ){
+      console.log('los lugar');
+      $.ajax({
+        type: "GET",
+        url: "/tradiciones/mostrarTradiciones/municipio/"+ valorLugarMunicipio,    
+        success : function(r){
+            $('#mostrarResultadoT').html(r);
+        }
+      });
+    } 
+
+  });
+
   $('#checkLugar').change(function() {
     if(this.checked != true){
       $('.divLugares').hide(1000);
@@ -71,11 +119,46 @@ $(document).ready(function(){
     estadoFiltroSitios () 
   });
 
+
+
+
+  $('#checkLugarT').change(function() {
+    if(this.checked != true){
+      $('.divLugaresT').hide(1000);
+      console.log('off');
+    }else{
+      $('.divLugaresT').show(1000);
+      console.log('on');
+    }
+    estadoFiltroTradiciones ()
+  });
+
+  $('#checkTipoT').change(function() {
+    if(this.checked != true){
+      $('.divTipoTradiciones').hide(1000);
+      console.log('estado: '+$('#checkTipo').is(':checked'));
+    }else{
+      $('.divTipoTradiciones').show(700);
+      console.log('estado: '+$('#checkTipo').is(':checked'));
+    }
+    estadoFiltroTradiciones() 
+  });
+
+
+  
   function estadoFiltroSitios (){
     if($('#checkTipo').is(':checked') || $('#checkLugar').is(':checked')){
       $('#buscarFiltroSitios').show();
     }else{
       $('#buscarFiltroSitios').hide();
+    }
+  }
+
+  function estadoFiltroTradiciones (){
+    if($('#checkTipoT').is(':checked') || $('#checkLugarT').is(':checked')){
+      $('#buscarFiltroTradiciones').show();
+    }else{
+      $('#buscarFiltroTradiciones').hide();
     }
   }
 
@@ -87,8 +170,9 @@ $(document).ready(function(){
   recargarSelectConEstados();
   recargarSelectConRegiones();
   recargarSelectConTiposSitios();
+  recargarSelectConTiposTradiciones();
   recargarSelectConMunicipiosByRegiones();
-
+  tablaMunicipioHasTradicion();
 
   $('#idEstado').change(function(){
     recargarTablaDeRegionesByEstado();
@@ -99,6 +183,15 @@ $(document).ready(function(){
     recargarTablaSitios();
   });
 
+  $('#idTipoTradicion').change(function(){
+    recargarTablaTradiciones();
+  });
+
+$('#agregarMunicipioTradicion').change(function(){
+  tablaMunicipioHasTradicion();
+});
+
+  
  
 
   $('#selectRegionesByEstado').change(function(){
@@ -151,6 +244,18 @@ function recargarTablaSitios(){
   });
 }
 
+
+function recargarTablaTradiciones(){
+  let valor = $('#idTipoTradicion').val();
+  $.ajax({
+    type: 'GET',
+    url: '/tradiciones/tablaMostrarTasks/'+valor,
+    success:function(response){
+      $('#mostrarTablaTradiciones').html(response);
+    }
+  });
+}
+
 function recargarSelectConTiposSitios(){
   $.ajax({
     type:"GET",
@@ -173,6 +278,28 @@ function recargarSelectConTiposSitios(){
   });
 }
 
+function recargarSelectConTiposTradiciones(){
+  
+  $.ajax({
+    type:"GET",
+    url:"/tipotradicion/getAll" ,
+    success:function(r){
+      let datos = JSON.parse(r);			
+      console.log('datos');
+      var selectElemento = document.getElementById( 'idTipoTradicion' );
+      selectElemento.length=0;	
+      selectElemento.options[0] = new Option('Elige un tipo','');
+      selectElemento.selectedIndex = 0;
+      
+      for (var i=0; i<datos.length; i++) {
+        selectElemento.options[selectElemento.length] = new Option(datos[i]['tipo'], datos[i]['id']);
+      }	
+      $("#idTipoTradicion").material_select();
+    
+      
+    }
+  });
+}
 
 function recargarSelectConEstados(){
   $.ajax({
@@ -274,6 +401,32 @@ function altaDeMunicipioHasLenguaje(){
     }
   });
 }
+
+
+function tablaMunicipioHasTradicion(){
+  let idTradicion = $('#idTradicion').val();
+  $.ajax({
+    type: "GET",
+    url: "/admin/tradiciones/getMunicipios/"+ idTradicion,
+    success:function(r){
+      $('#mostrarTablaMuniTradiciones').html(r);
+    }
+  });
+}
+
+function altaDeMunicipioHasTradicion(){
+  let idTradicion = $('#idTradicion').val();
+  let idMunicipio = $('#selectMunicipiosByRegiones').val();
+
+  $.ajax({
+    type: "GET",
+    url: "/asignartradicion/tradicion/"+ idTradicion +"/municipio/"+idMunicipio,
+    success:function(r){
+      alert(r);
+    }
+  });
+}
+
 
 function coleccionMunicipioHasLenguajes(){
   let idLengua = $('#idLenguaje').val();
