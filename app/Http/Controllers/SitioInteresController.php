@@ -83,12 +83,11 @@ class SitioInteresController extends Controller
 
     public function userSitiosDeInteresByTipo($idTipo) 
     { 
-        //session_start();
         
         $sitios = SitioInteres::where( 'id_tipo_interes', $idTipo )->where( 'disponibilidad', 'Disponible' )->get();
 
         
-        $cadena = "<table> <thead> <tr> <th>Lugar</th> <th>Region</th> <th>Municipio</th> <td> </td> </tr> </thead> <tbody>";
+        $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Region</th> <th>Municipio</th> <td> </td> </tr> </thead> <tbody>";
 
         foreach($sitios as $sitio){
             $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->where( 'disponibilidad', 'Disponible' )->get()[0];
@@ -104,6 +103,29 @@ class SitioInteresController extends Controller
         return $cadena . " </tbody> </table> ";
          
     }
+
+    public function userSitiosDeInteresByLugar($idMunicipio) 
+    { 
+        
+        $sitios = SitioInteres::where( 'id_municipio', $idMunicipio )->where( 'disponibilidad', 'Disponible' )->get();
+
+        
+        $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Tipo</th>  <td> </td> </tr> </thead> <tbody>";
+
+        foreach($sitios as $sitio){
+            $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
+        
+            
+            if($sitio || $municipio || $region){
+                $cadena = $cadena ." <tr> <td>$sitio->nombre</td> <td>$tipo->nombre</td>  <td> <a class='waves-effect waves-light btn' href='/sitios/sitio/$sitio->id_interes_cult'  >Info</a>  </td>  </tr>";
+            }
+            
+        }
+        
+        return $cadena . " </tbody> </table> ";
+         
+    }
+    
     
     
     public function tablaSitiosDeInteresByTipo($id) 
