@@ -115,6 +115,61 @@ class TradicionController extends Controller
          
     }
 
+    public function infoTradicion($id) 
+    { 
+        session_start();
+        
+        $tradicion = Tradicion::where( 'id_tradicion', $id )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $tipo  = TipoTradicion::where( 'id_tipo_tradicion', $tradicion->id_tipo_tradicion)->where( 'disponibilidad', 'Disponible' )->get()[0];
+        
+        
+        return view('tradicion.infoTradicion', compact('tradicion', 'tipo'));
+    }
+
+    
+    public function userTradicionByTipo($idTipo) 
+    { 
+        $tradiciones = Tradicion::where( 'id_tipo_tradicion', $idTipo )->where( 'disponibilidad', 'Disponible' )->get();
+        
+        $cadena = "<table> <thead> <tr> <th>Tradicion</th>  <td> </td> </tr> </thead> <tbody>";
+
+        foreach($tradiciones as $tradicion){
+            $cadena = $cadena ." <tr> <td>$tradicion->nombre</td>  <td> <a class='waves-effect waves-light btn' href='/tradiciones/tradicion/$tradicion->id_tradicion'  >Info</a>  </td>  </tr>";
+        }
+        
+        return $cadena . " </tbody> </table> ";
+    }
+
+    public function userTradicionByLugar($idMunicipio) 
+    { 
+        $tradiciones = Tradicion::where( 'id_municipio', $idMunicipio )->where( 'disponibilidad', 'Disponible' )->get();
+        $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Tipo</th>  <td> </td> </tr> </thead> <tbody>";
+
+        foreach($tradiciones as $tradicion){
+            $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
+        
+            if($sitio || $municipio || $region){
+                $cadena = $cadena ." <tr> <td>$sitio->nombre</td> <td>$tipo->nombre</td>  <td> <a class='waves-effect waves-light btn' href='/tradiciones/tradicion/$sitio->id_interes_cult'  >Info</a>  </td>  </tr>";
+            }
+            
+        }
+        
+        return $cadena . " </tbody> </table> ";
+    } 
+    
+    public function userTradicionByLugarAndTipo( $idTipo, $idMunicipio) 
+    { 
+        $tradiciones = Tradicion::where( 'id_municipio', $idMunicipio )->where( 'id_tipo_tradicion', $idTipo )->where( 'disponibilidad', 'Disponible' )->get();
+        $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Tipo</th>  <td> </td> </tr> </thead> <tbody>";
+
+        foreach($tradiciones as $tradicion){
+            $cadena = $cadena ." <tr> <td>$sitio->nombre</td> <td>$tipo->nombre</td>  <td> <a class='waves-effect waves-light btn' href='/tradiciones/tradicion/$sitio->id_interes_cult'  >Info</a>  </td>  </tr>";
+        }
+        
+        return $cadena . " </tbody> </table> ";
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
