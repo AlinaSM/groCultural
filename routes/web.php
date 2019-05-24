@@ -80,7 +80,7 @@ Route::get('/municipios/tablaMunicipiosByRegion/{idRegion}', 'MunicipioControlle
 Route::get('/municipios/getByRegiones/{idRegion}', 'MunicipioController@municipiosByRegiones');
 Route::get('/municipios/getAllInformation/{id}', 'MunicipioController@getAllInformation');
 Route::get('/municipios/allFromAllRegiones/', 'MunicipioController@listadoDeMunicipiosClasificadoPorRegiones');
-
+Route::get('/lenguajes/getInfo/{id}', 'LenguajeController@getInfo');
 
 Route::get('/admin/lenguajes/asignar/{id}', 'LenguajeController@asignarLugarView');
 Route::get('/admin/religiones/asignar/{id}', 'ReligionController@asignarLugarView');
