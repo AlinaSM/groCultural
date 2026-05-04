@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   $(document).ready(function(){
-    $('select').material_select();
+    $('select').formSelect();
 });
 
 

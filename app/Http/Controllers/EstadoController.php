@@ -1,8 +1,8 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GroCultural\Estado;
+use App\Models\Estado;
 use Illuminate\Http\Request;
 
 class EstadoController extends Controller
@@ -27,8 +27,8 @@ class EstadoController extends Controller
 
 
     public function getAllElements(){
-        $estados = Estado::where( 'disponibilidad', 'Disponible' )->get();
-        // $estados = Region::where( 'id_estado', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        $estados = Estado::query()->get();
+        // $estados = Region::where( 'id_estado', $id )->get();
 
         $array = array();
         foreach($estados as $registro){

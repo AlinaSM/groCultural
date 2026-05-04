@@ -1,8 +1,8 @@
 <?php
 
-namespace GroCultural\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use GroCultural\Http\Controllers\Controller;
+use App\Models\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller

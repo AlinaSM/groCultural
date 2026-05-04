@@ -25,6 +25,7 @@ class CreateReligionsTable extends Migration
             $table->increments('id_religion');
             $table->string('nombre', 45);
             $table->longText('descripcion');
+            $table->string('disponibilidad', 45)->default('Disponible');
             $table->timestamps();
         });
     }

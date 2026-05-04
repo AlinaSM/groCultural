@@ -264,6 +264,7 @@ function recargarSelectConTiposSitios(){
       let datos = JSON.parse(r);			
      
       var selectElemento = document.getElementById( 'idTipoSitio' );
+      if(!selectElemento) return;
       selectElemento.length=0;	
       selectElemento.options[0] = new Option('Elige un tipo','');
       selectElemento.selectedIndex = 0;
@@ -271,7 +272,7 @@ function recargarSelectConTiposSitios(){
       for (var i=0; i<datos.length; i++) {
         selectElemento.options[selectElemento.length] = new Option(datos[i]['tipoSitio'], datos[i]['id']);
       }	
-      $("#idTipoSitio").material_select();
+      $("#idTipoSitio").formSelect();
     
       console.log(datos);
     }
@@ -287,6 +288,7 @@ function recargarSelectConTiposTradiciones(){
       let datos = JSON.parse(r);			
       console.log('datos');
       var selectElemento = document.getElementById( 'idTipoTradicion' );
+      if(!selectElemento) return;
       selectElemento.length=0;	
       selectElemento.options[0] = new Option('Elige un tipo','');
       selectElemento.selectedIndex = 0;
@@ -294,7 +296,7 @@ function recargarSelectConTiposTradiciones(){
       for (var i=0; i<datos.length; i++) {
         selectElemento.options[selectElemento.length] = new Option(datos[i]['tipo'], datos[i]['id']);
       }	
-      $("#idTipoTradicion").material_select();
+      $("#idTipoTradicion").formSelect();
     
       
     }
@@ -309,6 +311,7 @@ function recargarSelectConEstados(){
       let datos = JSON.parse(r);			
       
       var selectElemento = document.getElementById( 'idEstado' );
+      if(!selectElemento) return;
       selectElemento.length=0;	
       selectElemento.options[0] = new Option('Elige un Estado','');
       selectElemento.selectedIndex = 0;
@@ -316,7 +319,7 @@ function recargarSelectConEstados(){
       for (var i=0; i<datos.length; i++) {
         selectElemento.options[selectElemento.length] = new Option(datos[i]['estado'], datos[i]['id']);
       }	
-      $("#idEstado").material_select();
+      $("#idEstado").formSelect();
     
       //console.log(datos);
     }
@@ -330,7 +333,7 @@ function recargarSelectConTiposDeSitios(){
     url:"/sitios/getAllSitiosByTipo/" + valor,
     success:function(r){
      
-      $("#selectRegionesByEstado").material_select();
+      $("#selectRegionesByEstado").formSelect();
     
     }
   });
@@ -352,6 +355,7 @@ function recargarSelectConRegiones(){
       let datos = JSON.parse(r);			
       
       var selectElemento = document.getElementById( 'selectRegionesByEstado' );
+      if(!selectElemento) return;
       selectElemento.length=0;	
       selectElemento.options[0] = new Option('Elige una Region','');
       selectElemento.selectedIndex = 0;
@@ -359,7 +363,7 @@ function recargarSelectConRegiones(){
       for (var i=0; i<datos.length; i++) {
         selectElemento.options[selectElemento.length] = new Option(datos[i]['region'], datos[i]['id']);
       }	
-      $("#selectRegionesByEstado").material_select();
+      $("#selectRegionesByEstado").formSelect();
     
     }
   });
@@ -375,6 +379,7 @@ function recargarSelectConMunicipiosByRegiones(){
       let datos = JSON.parse(r);			
       
       var selectElemento = document.getElementById( 'selectMunicipiosByRegiones' );
+      if(!selectElemento) return;
       selectElemento.length=0;	
       selectElemento.options[0] = new Option('Elige un municipio','');
       selectElemento.selectedIndex = 0;
@@ -382,7 +387,7 @@ function recargarSelectConMunicipiosByRegiones(){
       for (var i=0; i<datos.length; i++) {
         selectElemento.options[selectElemento.length] = new Option(datos[i]['municipio'], datos[i]['id']);
       }	
-      $("#selectMunicipiosByRegiones").material_select();
+      $("#selectMunicipiosByRegiones").formSelect();
     
     }
   });
@@ -430,11 +435,12 @@ function altaDeMunicipioHasTradicion(){
 
 function coleccionMunicipioHasLenguajes(){
   let idLengua = $('#idLenguaje').val();
+  if(!idLengua) return;
   $.ajax({
     type: "GET",
-    url: "/admin/lenguajes/coleccionDeLugares/"+ $idLengua,
+    url: "/admin/lenguajes/coleccionDeLugares/"+ idLengua,
     success:function(r){
-      alert(idLengua);
+      // alert(idLengua);
       //$('#prueba').html(r);
     }
   });

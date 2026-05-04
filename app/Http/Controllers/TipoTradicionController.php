@@ -1,10 +1,10 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GroCultural\Tradicion;
-use GroCultural\TipoTradicion;
+use App\Models\Tradicion;
+use App\Models\TipoTradicion;
 
 
 class TipoTradicionController extends Controller
@@ -20,7 +20,7 @@ class TipoTradicionController extends Controller
     }
 
     public function getAllElements(){
-        $tipos = TipoTradicion::where( 'disponibilidad', 'Disponible' )->get();
+        $tipos = TipoTradicion::query()->get();
 
         $arrayElements = array();
         foreach($tipos as $data){

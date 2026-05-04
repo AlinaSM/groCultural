@@ -53,7 +53,7 @@
     </footer>
 
     <script src="{{ asset('js/admin/jquery.min.js') }} "></script>
-    <script src="{{ asset('js/admin/materialize.min.js') }} "></script>
+    <script src="{{ asset('js/materialize.min.js') }} "></script>
     
     <script src="{{ asset('js/main.js') }} "></script>
     <script src="{{ asset('js/materialize.js') }} "></script>

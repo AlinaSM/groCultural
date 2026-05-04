@@ -1,8 +1,8 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GroCultural\Religion;
+use App\Models\Religion;
 use Illuminate\Http\Request;
 
 class ReligionController extends Controller
@@ -15,14 +15,14 @@ class ReligionController extends Controller
     public function index()
     {
         //
-        $religiones = Religion::where( 'disponibilidad', 'Disponible' )->get();
+        $religiones = Religion::query()->get();
         return view('religion.index', compact('religiones'));
     }
 
     public function tasks() 
     { 
         session_start();
-        $religiones = Religion::where( 'disponibilidad', 'Disponible' )->get();
+        $religiones = Religion::query()->get();
         return view('religion.tasks', compact('religiones'));
     }
     /**
@@ -37,7 +37,7 @@ class ReligionController extends Controller
     }
 
     public function getInfo( $id ){
-        $lenguajes = Religion::where( 'id_religion', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        $lenguajes = Religion::where( 'id_religion', $id )->get();
 
         $arrayElements = array();
         foreach($lenguajes as $lenguaje){
@@ -60,7 +60,7 @@ class ReligionController extends Controller
         
         $religion->nombre = $request->input('nombre'); 
         $religion->descripcion = $request->input('descripcion'); 
-        $religion->disponibilidad = "Disponible";
+        
 
         $religion->save();
 
@@ -112,7 +112,7 @@ class ReligionController extends Controller
         
         $religiones->nombre = $request->input('nombre'); 
         $religiones->descripcion = $request->input('descripcion'); 
-        $religiones->disponibilidad = "Disponible";
+        
 
         $religiones->save();
 
@@ -130,7 +130,7 @@ class ReligionController extends Controller
     {
         session_start();
         $religion = Religion::find($id);
-        $religion->disponibilidad = "noDisponible";
+        
         $religion->save();
         $op = 'Se ha eliminado el registro correctamente';
         return view('admin.confirmar', compact('op'));

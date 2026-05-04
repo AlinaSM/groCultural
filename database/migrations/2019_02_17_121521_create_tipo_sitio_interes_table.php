@@ -24,6 +24,7 @@ class CreateTipoSitioInteresTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id_tipo_interes');
             $table->string('nombre', 45);
+            $table->string('disponibilidad', 45)->default('Disponible');
             $table->timestamps();
         });
     }

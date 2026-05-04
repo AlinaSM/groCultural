@@ -1,10 +1,10 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GroCultural\Estado;
-use GroCultural\Region;
-use GroCultural\Municipio;
+use App\Models\Estado;
+use App\Models\Region;
+use App\Models\Municipio;
 
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class MunicipioController extends Controller
      */
     public function index()
     {
-        $regiones = Region::where('disponibilidad', 'Disponible')->get();
+        $regiones = Region::query()->get();
         return view('municipio.index', compact('regiones'));
     }
 
@@ -30,7 +30,8 @@ class MunicipioController extends Controller
     }
 
     public function municipiosByRegiones( $id ){
-        $municipios = Municipio::where( 'id_region', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        if($id === 'undefined') { echo json_encode([]); return; }
+        $municipios = Municipio::where( 'id_region', $id )->get();
 
         $arrayElements = array();
         foreach($municipios as $municipio){
@@ -42,7 +43,7 @@ class MunicipioController extends Controller
 
 
     public function getAllInformation( $id ){
-        $municipios = Municipio::where( 'id_municipio', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        $municipios = Municipio::where( 'id_municipio', $id )->get();
 
         $arrayElements = array();
         foreach($municipios as $municipio){
@@ -57,7 +58,7 @@ class MunicipioController extends Controller
     public function tablaMunicipiosByRegion( $idRegion ){
         session_start();
         
-        $municipios = Municipio::where( 'id_region', $idRegion )->where( 'disponibilidad', 'Disponible' )->get();
+        $municipios = Municipio::where( 'id_region', $idRegion )->get();
         
         $cadena = "<table>
         <thead>
@@ -90,8 +91,8 @@ class MunicipioController extends Controller
     } 
 
     public function listadoDeMunicipiosClasificadoPorRegiones(){
-        $regiones   =  Region::where( 'id_estado', 1 )->where( 'disponibilidad', 'Disponible' )->get();
-        $municipios =  Municipio::where( 'disponibilidad', 'Disponible' )->get();
+        $regiones   =  Region::where( 'id_estado', 1 )->get();
+        $municipios =  Municipio::query()->get();
         
         $diccionarioMunicipios = array();
         foreach ($regiones as $region){
@@ -151,7 +152,7 @@ class MunicipioController extends Controller
         $municipio->id_region = $request->input('Region');
         $municipio->mapa = $pathMapas . '/'.$nameMapa ; 
         $municipio->escudo = $pathEscudo . '/'.$nameEscudo ;    
-        $municipio->disponibilidad = "Disponible";
+        
 
         $municipio->save();
         $op = 'Se ha ingresado correctamente un nuevo municipio';
@@ -251,7 +252,7 @@ class MunicipioController extends Controller
         session_start();
         
         $municipio = Municipio::find($id);
-        $municipio->disponibilidad = "noDisponible";
+        
         $municipio->save();
         $op = 'Se ha eliminado el registro correctamente';
         return view('admin.confirmar', compact('op'));
