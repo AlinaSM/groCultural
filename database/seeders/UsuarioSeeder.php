@@ -13,7 +13,7 @@ class UsuarioSeeder extends Seeder
     public function run()
     {
         \DB::table('usuarios')->insert([
-            'username' => 'admin_central',
+            'username' => 'adminfgsm',
             'contrasena' => bcrypt('password123'), // O Hash::make()
             'tipo_usuario' => 'Administrador',
             'nombre' => 'Admin',

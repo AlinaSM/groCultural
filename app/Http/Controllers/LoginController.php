@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -46,7 +47,7 @@ class LoginController extends Controller
         $usuarios = Usuario::all();
 
         foreach($usuarios as $user){
-            if($request->alias == $user->username && $request->contrasena == $user->contrasena ){
+            if($request->alias == $user->username && Hash::check($request->contrasena, $user->contrasena)){
                 $value = session('key', 'default');
                 /*
                 Session::push('id', $user->id);
@@ -69,7 +70,7 @@ class LoginController extends Controller
             
             return view('admin.home');
         }else{
-            return view('admin.login'); //TODO: Alertar que el login no se ejecuto
+            return view('admin.login')->with('error', 'El usuario o la contraseña son incorrectos.'); 
         }
     }
 
