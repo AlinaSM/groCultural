@@ -432,7 +432,7 @@ function coleccionMunicipioHasLenguajes(){
   let idLengua = $('#idLenguaje').val();
   $.ajax({
     type: "GET",
-    url: "/admin/lenguajes/coleccionDeLugares/"+ $idLengua,
+    url: "/admin/lenguajes/coleccionDeLugares/"+ idLengua,
     success:function(r){
       alert(idLengua);
       //$('#prueba').html(r);

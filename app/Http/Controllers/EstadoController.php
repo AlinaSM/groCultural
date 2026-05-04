@@ -27,8 +27,8 @@ class EstadoController extends Controller
 
 
     public function getAllElements(){
-        $estados = Estado::where( 'disponibilidad', 'Disponible' )->get();
-        // $estados = Region::where( 'id_estado', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        $estados = Estado::query()->get();
+        // $estados = Region::where( 'id_estado', $id )->get();
 
         $array = array();
         foreach($estados as $registro){

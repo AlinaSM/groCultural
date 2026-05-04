@@ -20,7 +20,7 @@ class SitioInteresController extends Controller
     public function index()
     {
 
-        $tiposSitios  = TipoSitioInteres::where( 'disponibilidad', 'Disponible' )->get();
+        $tiposSitios  = TipoSitioInteres::query()->get();
         return view('sitios.index', compact('tiposSitios'));
 
     }
@@ -33,8 +33,8 @@ class SitioInteresController extends Controller
     }
 
     public function mostrarSitiosByMunicipio($idMunicipio){
-        $sitios = SitioInteres::where( 'id_municipio', $idMunicipio )->where( 'disponibilidad', 'Disponible' )->get();
-        $tipos = TipoSitioInteres::where( 'disponibilidad', 'Disponible' )->get();
+        $sitios = SitioInteres::where( 'id_municipio', $idMunicipio )->get();
+        $tipos = TipoSitioInteres::query()->get();
        
         $cadenaHTML = "<div class='collection'>";
 
@@ -72,10 +72,10 @@ class SitioInteresController extends Controller
     { 
         session_start();
         
-        $sitio = SitioInteres::where( 'id_interes_cult', $id )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $region = Region::where( 'id_region', $municipio->id_region )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $sitio = SitioInteres::where( 'id_interes_cult', $id )->get()[0];
+        $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->get()[0];
+        $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->get()[0];
+        $region = Region::where( 'id_region', $municipio->id_region )->get()[0];
         
 
         return view('sitios.sitioInfo', compact('sitio', 'tipo', 'municipio', 'region'));
@@ -83,13 +83,13 @@ class SitioInteresController extends Controller
 
     public function userSitiosDeInteresByTipo($idTipo) 
     { 
-        $sitios = SitioInteres::where( 'id_tipo_interes', $idTipo )->where( 'disponibilidad', 'Disponible' )->get();
+        $sitios = SitioInteres::where( 'id_tipo_interes', $idTipo )->get();
         
         $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Region</th> <th>Municipio</th> <td> </td> </tr> </thead> <tbody>";
 
         foreach($sitios as $sitio){
-            $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->where( 'disponibilidad', 'Disponible' )->get()[0];
-            $region = Region::where( 'id_region', $municipio->id_region )->where( 'disponibilidad', 'Disponible' )->get()[0];
+            $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->get()[0];
+            $region = Region::where( 'id_region', $municipio->id_region )->get()[0];
             
             
             if($sitio || $municipio || $region){
@@ -103,11 +103,11 @@ class SitioInteresController extends Controller
 
     public function userSitiosDeInteresByLugar($idMunicipio) 
     { 
-        $sitios = SitioInteres::where( 'id_municipio', $idMunicipio )->where( 'disponibilidad', 'Disponible' )->get();
+        $sitios = SitioInteres::where( 'id_municipio', $idMunicipio )->get();
         $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Tipo</th>  <td> </td> </tr> </thead> <tbody>";
 
         foreach($sitios as $sitio){
-            $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
+            $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->get()[0];
         
             if($sitio || $municipio || $region){
                 $cadena = $cadena ." <tr> <td>$sitio->nombre</td> <td>$tipo->nombre</td>  <td> <a class='waves-effect waves-light btn' href='/sitios/sitio/$sitio->id_interes_cult'  >Info</a>  </td>  </tr>";
@@ -120,7 +120,7 @@ class SitioInteresController extends Controller
     
     public function userSitiosDeInteresByLugarAndTipo( $idTipo, $idMunicipio) 
     { 
-        $sitios = SitioInteres::where( 'id_municipio', $idMunicipio )->where( 'id_tipo_interes', $idTipo )->where( 'disponibilidad', 'Disponible' )->get();
+        $sitios = SitioInteres::where( 'id_municipio', $idMunicipio )->where( 'id_tipo_interes', $idTipo )->get();
         $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Tipo</th>  <td> </td> </tr> </thead> <tbody>";
 
         foreach($sitios as $sitio){
@@ -135,7 +135,7 @@ class SitioInteresController extends Controller
     { 
         session_start();
         
-        $sitios = SitioInteres::where( 'id_tipo_interes', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        $sitios = SitioInteres::where( 'id_tipo_interes', $id )->get();
         
         $cadena = "<table>
         <thead>
@@ -150,10 +150,10 @@ class SitioInteresController extends Controller
 
         foreach($sitios as $sitio){
 
-            $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
-            $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->where( 'disponibilidad', 'Disponible' )->get()[0];
-            $region = Region::where( 'id_region', $municipio->id_region )->where( 'disponibilidad', 'Disponible' )->get()[0];
-            $estado = Estado::where( 'id_estado', $region->id_estado )->where( 'disponibilidad', 'Disponible' )->get()[0];
+            $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->get()[0];
+            $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->get()[0];
+            $region = Region::where( 'id_region', $municipio->id_region )->get()[0];
+            $estado = Estado::where( 'id_estado', $region->id_estado )->get()[0];
             
             if($sitio || $tipo || $municipio || $region || $estado ){
                 $cadena = $cadena ."<tr>
@@ -202,7 +202,7 @@ class SitioInteresController extends Controller
         $sitio->id_municipio = $request->input('Municipio');
         $sitio->id_tipo_interes = $request->input('tipo');
         $sitio->imagen = $pathImagen . '/'.$nameImagen ; 
-        $sitio->disponibilidad = "Disponible";
+        
 
         $sitio->save();
         $op = 'Se ha ingresado correctamente un nuevo sitio de interes';
@@ -219,11 +219,11 @@ class SitioInteresController extends Controller
     {
         session_start();
 
-        $sitio = SitioInteres::where( 'id_interes_cult', $id )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $region = Region::where( 'id_region', $municipio->id_region )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $estado = Estado::where( 'id_estado', $region->id_estado )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $sitio = SitioInteres::where( 'id_interes_cult', $id )->get()[0];
+        $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->get()[0];
+        $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->get()[0];
+        $region = Region::where( 'id_region', $municipio->id_region )->get()[0];
+        $estado = Estado::where( 'id_estado', $region->id_estado )->get()[0];
 
         if($sitio || $tipo || $municipio || $region || $estado ){
             return view('sitios.show', compact('sitio', 'estado', 'region', 'municipio' ,'tipo'));
@@ -242,11 +242,11 @@ class SitioInteresController extends Controller
     public function edit($id)
     {
         session_start();
-        $sitio = SitioInteres::where( 'id_interes_cult', $id )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $region = Region::where( 'id_region', $municipio->id_region )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $estado = Estado::where( 'id_estado', $region->id_estado )->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $sitio = SitioInteres::where( 'id_interes_cult', $id )->get()[0];
+        $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->get()[0];
+        $municipio = Municipio::where( 'id_municipio', $sitio->id_municipio )->get()[0];
+        $region = Region::where( 'id_region', $municipio->id_region )->get()[0];
+        $estado = Estado::where( 'id_estado', $region->id_estado )->get()[0];
 
         return view('sitios.edit', compact('sitio', 'estado', 'region', 'municipio' ,'tipo'));
     }
@@ -268,7 +268,7 @@ class SitioInteresController extends Controller
         $sitio->horario = $request->input('horario'); 
         $sitio->direccion = $request->input('direccion'); 
         $sitio->descripcion_general = $request->input('descripcion_general');
-        $sitio->disponibilidad = "Disponible";
+        
 
         if( $request->input('Municipio') ){
             $sitio->id_municipio = $request->input('Municipio');
@@ -304,7 +304,7 @@ class SitioInteresController extends Controller
         session_start();
         
         $sitio = SitioInteres::find($id);
-        $sitio->disponibilidad = "noDisponible";
+        
         $sitio->save();
         $op = 'Se ha eliminado el registro correctamente';
         return view('admin.confirmar', compact('op'));

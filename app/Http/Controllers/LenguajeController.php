@@ -16,14 +16,14 @@ class LenguajeController extends Controller
     public function index()
     {
         //
-        $lenguajes = Lenguaje::where( 'disponibilidad', 'Disponible' )->get();
+        $lenguajes = Lenguaje::query()->get();
         return view('lenguaje.index',compact('lenguajes'));
     }
 
     public function tasks() 
     { 
         session_start();
-        $lenguajes = Lenguaje::where( 'disponibilidad', 'Disponible' )->get();
+        $lenguajes = Lenguaje::query()->get();
         return view('lenguaje.tasks', compact('lenguajes'));
     }
 
@@ -49,7 +49,7 @@ class LenguajeController extends Controller
     }
 
     public function getInfo( $id ){
-        $lenguajes = Lenguaje::where( 'id_lengua', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        $lenguajes = Lenguaje::where( 'id_lengua', $id )->get();
 
         $arrayElements = array();
         foreach($lenguajes as $lenguaje){
@@ -89,7 +89,7 @@ class LenguajeController extends Controller
         
         $lenguaje->nombre = $request->input('nombre'); 
         $lenguaje->descripcion = $request->input('descripcion'); 
-        $lenguaje->disponibilidad = "Disponible";
+        
 
         $lenguaje->save();
 
@@ -152,7 +152,7 @@ class LenguajeController extends Controller
         
         $lenguaje->nombre = $request->input('nombre'); 
         $lenguaje->descripcion = $request->input('descripcion'); 
-        $lenguaje->disponibilidad = "Disponible";
+        
 
         $lenguaje->save();
 
@@ -171,7 +171,7 @@ class LenguajeController extends Controller
     {
         session_start();
         $lenguaje = Lenguaje::find($id);
-        $lenguaje->disponibilidad = "noDisponible";
+        
         $lenguaje->save();
         $op = 'Se ha eliminado el registro correctamente';
         return view('admin.confirmar', compact('op'));

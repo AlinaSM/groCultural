@@ -18,7 +18,7 @@ class TipoSitioInteresController extends Controller
     }
 
     public function getAllElements(){
-        $tipos = TipoSitioInteres::where( 'disponibilidad', 'Disponible' )->get();
+        $tipos = TipoSitioInteres::query()->get();
 
         $arrayElements = array();
         foreach($tipos as $data){

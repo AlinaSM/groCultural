@@ -13,6 +13,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \->call(UsersTableSeeder::class);
+        $this->call([
+            UsuarioSeeder::class,
+            
+            EstadoSeeder::class,
+            RegionSeeder::class,
+            MunicipioSeeder::class,
+            
+            FaunaSeeder::class,
+            FloraSeeder::class,
+            LenguajeSeeder::class,
+            ReligionSeeder::class,
+            
+            TipoSitioInteresSeeder::class,
+            SitioInteresSeeder::class,
+            
+            TipoTradicionSeeder::class,
+            TradicionSeeder::class,
+            
+            // Tablas pivote insertadas dinámicamente
+            FaunaMunicipioSeeder::class,
+            FloraMunicipioSeeder::class,
+            MunicipioLenguajeSeeder::class,
+            MunicipioReligionSeeder::class,
+            MunicipioTradicionSeeder::class,
+        ]);
     }
 }

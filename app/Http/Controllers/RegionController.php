@@ -15,7 +15,7 @@ class RegionController extends Controller
      */
     public function index()
     {
-        $regiones = Region::where('id_estado' , 1)->where( 'disponibilidad', 'Disponible' )->get();
+        $regiones = Region::where('id_estado' , 1)->get();
         return view('region.index', compact('regiones'));
     }
 
@@ -28,7 +28,7 @@ class RegionController extends Controller
     }
 
     public function regionesByEstado( $id ){
-        $regiones = Region::where( 'id_estado', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        $regiones = Region::where( 'id_estado', $id )->get();
 
         $arrayRegiones = array();
         foreach($regiones as $region){
@@ -42,7 +42,7 @@ class RegionController extends Controller
     { 
         session_start();
         
-        $regiones = Region::where( 'id_estado', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        $regiones = Region::where( 'id_estado', $id )->get();
         
         $cadena = "<table>
         <thead>
@@ -124,7 +124,7 @@ class RegionController extends Controller
         $region->descripcion = $request->input('descripcion'); 
         $region->mapa = $pathMapas . '/'.$nameMapa ; 
         $region->id_estado = $request->input('Estado'); 
-        $region->disponibilidad = "Disponible";
+        
 
         $region->save();
         $op = 'Se ha ingresado correctamente una nueva region';
@@ -190,7 +190,7 @@ class RegionController extends Controller
         $region->numero_habitantes = $request->input('numero_habitantes');
         $region->numero_municipios = $request->input('numero_municipios');
         $region->descripcion = $request->input('descripcion'); 
-        $region->disponibilidad = "Disponible";
+        
         $region->id_estado = $request->input('Estado'); 
 
         if($request->hasFile('mapa')){
@@ -219,7 +219,7 @@ class RegionController extends Controller
         session_start();
 
         $region = Region::find($id);
-        $region->disponibilidad = "noDisponible";
+        
         $region->save();
         $op = 'Se ha eliminado el registro correctamente';
         return view('admin.confirmar', compact('op'));

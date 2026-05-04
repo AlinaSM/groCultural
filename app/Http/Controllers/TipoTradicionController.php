@@ -20,7 +20,7 @@ class TipoTradicionController extends Controller
     }
 
     public function getAllElements(){
-        $tipos = TipoTradicion::where( 'disponibilidad', 'Disponible' )->get();
+        $tipos = TipoTradicion::query()->get();
 
         $arrayElements = array();
         foreach($tipos as $data){

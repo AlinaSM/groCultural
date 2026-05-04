@@ -50,7 +50,7 @@ class TradicionController extends Controller
     public function tasks() 
     { 
         session_start();
-        $tradiciones = Tradicion::where( 'disponibilidad', 'Disponible' )->get();
+        $tradiciones = Tradicion::query()->get();
         return view('tradicion.tasks', compact('tradiciones'));
     }
 
@@ -58,7 +58,7 @@ class TradicionController extends Controller
     { 
         session_start();
         
-        $tradiciones = Tradicion::where( 'id_tipo_tradicion', $id )->where( 'disponibilidad', 'Disponible' )->get();
+        $tradiciones = Tradicion::where( 'id_tipo_tradicion', $id )->get();
         
         $cadena = "<table>
         <thead>
@@ -73,7 +73,7 @@ class TradicionController extends Controller
 
         foreach($tradiciones as $tradicion){
 
-            $tipo  = TipoTradicion::where( 'id_tipo_tradicion', $tradicion->id_tipo_tradicion)->where( 'disponibilidad', 'Disponible' )->get()[0];
+            $tipo  = TipoTradicion::where( 'id_tipo_tradicion', $tradicion->id_tipo_tradicion)->get()[0];
            
         
                 $cadena = $cadena ."<tr>
@@ -106,7 +106,7 @@ class TradicionController extends Controller
 
         foreach($listadepares as $elemento){
 
-            $municipio  = Municipio::where( 'id_municipio', $elemento->id_municipio)->where( 'disponibilidad', 'Disponible' )->get()[0];
+            $municipio  = Municipio::where( 'id_municipio', $elemento->id_municipio)->get()[0];
             $cadena = $cadena ."<tr>   <td> $municipio->nombre </td> </tr> ";
         }
         
@@ -119,8 +119,8 @@ class TradicionController extends Controller
     { 
         session_start();
         
-        $tradicion = Tradicion::where( 'id_tradicion', $id )->where( 'disponibilidad', 'Disponible' )->get()[0];
-        $tipo  = TipoTradicion::where( 'id_tipo_tradicion', $tradicion->id_tipo_tradicion)->where( 'disponibilidad', 'Disponible' )->get()[0];
+        $tradicion = Tradicion::where( 'id_tradicion', $id )->get()[0];
+        $tipo  = TipoTradicion::where( 'id_tipo_tradicion', $tradicion->id_tipo_tradicion)->get()[0];
         
         
         return view('tradicion.infoTradicion', compact('tradicion', 'tipo'));
@@ -129,7 +129,7 @@ class TradicionController extends Controller
     
     public function userTradicionByTipo($idTipo) 
     { 
-        $tradiciones = Tradicion::where( 'id_tipo_tradicion', $idTipo )->where( 'disponibilidad', 'Disponible' )->get();
+        $tradiciones = Tradicion::where( 'id_tipo_tradicion', $idTipo )->get();
         
         $cadena = "<table> <thead> <tr> <th>Tradicion</th>  <td> </td> </tr> </thead> <tbody>";
 
@@ -142,11 +142,11 @@ class TradicionController extends Controller
 
     public function userTradicionByLugar($idMunicipio) 
     { 
-        $tradiciones = Tradicion::where( 'id_municipio', $idMunicipio )->where( 'disponibilidad', 'Disponible' )->get();
+        $tradiciones = Tradicion::where( 'id_municipio', $idMunicipio )->get();
         $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Tipo</th>  <td> </td> </tr> </thead> <tbody>";
 
         foreach($tradiciones as $tradicion){
-            $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->where( 'disponibilidad', 'Disponible' )->get()[0];
+            $tipo  = TipoSitioInteres::where( 'id_tipo_interes', $sitio->id_tipo_interes)->get()[0];
         
             if($sitio || $municipio || $region){
                 $cadena = $cadena ." <tr> <td>$sitio->nombre</td> <td>$tipo->nombre</td>  <td> <a class='waves-effect waves-light btn' href='/tradiciones/tradicion/$sitio->id_interes_cult'  >Info</a>  </td>  </tr>";
@@ -159,7 +159,7 @@ class TradicionController extends Controller
     
     public function userTradicionByLugarAndTipo( $idTipo, $idMunicipio) 
     { 
-        $tradiciones = Tradicion::where( 'id_municipio', $idMunicipio )->where( 'id_tipo_tradicion', $idTipo )->where( 'disponibilidad', 'Disponible' )->get();
+        $tradiciones = Tradicion::where( 'id_municipio', $idMunicipio )->where( 'id_tipo_tradicion', $idTipo )->get();
         $cadena = "<table> <thead> <tr> <th>Interes</th> <th>Tipo</th>  <td> </td> </tr> </thead> <tbody>";
 
         foreach($tradiciones as $tradicion){
@@ -178,7 +178,7 @@ class TradicionController extends Controller
     public function create()
     {
         session_start();
-        $tiposTradiciones = TipoTradicion::where( 'disponibilidad', 'Disponible' )->get();
+        $tiposTradiciones = TipoTradicion::query()->get();
         return view('tradicion.create', compact('tiposTradiciones'));
     }
 
@@ -207,7 +207,7 @@ class TradicionController extends Controller
         $tradicion->fecha_festejo = $request->input('fecha_festejo'); 
         $tradicion->id_tipo_tradicion = $request->input('tipo');
         $tradicion->imagen = $pathImagen . '/'.$nameImagen ; 
-        $tradicion->disponibilidad = "Disponible";
+        
 
         $tradicion->save();
         $op = 'Se ha ingresado correctamente una nueva tradicion';
