@@ -1,9 +1,9 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GroCultural\Lenguaje;
-use GroCultural\MunicipioHasLenguaje;
+use App\Models\Lenguaje;
+use App\Models\MunicipioHasLenguaje;
 use Illuminate\Http\Request;
 
 class LenguajeController extends Controller

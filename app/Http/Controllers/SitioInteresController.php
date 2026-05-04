@@ -1,14 +1,14 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use GroCultural\SitioInteres;
-use GroCultural\TipoSitioInteres;
-use GroCultural\Estado;
-use GroCultural\Region;
-use GroCultural\Municipio;
+use App\Models\SitioInteres;
+use App\Models\TipoSitioInteres;
+use App\Models\Estado;
+use App\Models\Region;
+use App\Models\Municipio;
 
 class SitioInteresController extends Controller
 {

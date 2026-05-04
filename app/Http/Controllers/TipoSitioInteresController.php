@@ -1,9 +1,9 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GroCultural\TipoSitioInteres;
+use App\Models\TipoSitioInteres;
 
 class TipoSitioInteresController extends Controller
 {

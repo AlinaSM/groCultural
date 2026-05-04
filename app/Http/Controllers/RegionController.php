@@ -1,9 +1,9 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GroCultural\Region;
-use GroCultural\Estado;
+use App\Models\Region;
+use App\Models\Estado;
 use Illuminate\Http\Request;
 
 class RegionController extends Controller

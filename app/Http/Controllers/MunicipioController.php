@@ -1,10 +1,10 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GroCultural\Estado;
-use GroCultural\Region;
-use GroCultural\Municipio;
+use App\Models\Estado;
+use App\Models\Region;
+use App\Models\Municipio;
 
 use Illuminate\Http\Request;
 

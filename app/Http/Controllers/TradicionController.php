@@ -1,13 +1,13 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GroCultural\Tradicion;
-use GroCultural\TipoTradicion;
-use GroCultural\Estado;
-use GroCultural\Region;
-use GroCultural\Municipio;
-use GroCultural\MunicipioHasTradicion;
+use App\Models\Tradicion;
+use App\Models\TipoTradicion;
+use App\Models\Estado;
+use App\Models\Region;
+use App\Models\Municipio;
+use App\Models\MunicipioHasTradicion;
 use Illuminate\Http\Request;
 
 class TradicionController extends Controller

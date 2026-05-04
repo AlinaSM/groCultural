@@ -1,8 +1,8 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GroCultural\Religion;
+use App\Models\Religion;
 use Illuminate\Http\Request;
 
 class ReligionController extends Controller

@@ -1,8 +1,8 @@
 <?php
 
-namespace GroCultural\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GroCultural\Estado;
+use App\Models\Estado;
 use Illuminate\Http\Request;
 
 class EstadoController extends Controller

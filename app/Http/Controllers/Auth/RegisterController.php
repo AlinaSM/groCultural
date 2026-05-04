@@ -1,9 +1,9 @@
 <?php
 
-namespace GroCultural\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use GroCultural\User;
-use GroCultural\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;

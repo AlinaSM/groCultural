@@ -1,10 +1,10 @@
 <?php
 
-namespace GroCultural;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FaunaHasImagen extends Model
+class Flora extends Model
 {
     //
 }
