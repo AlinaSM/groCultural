@@ -1,69 +1,71 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# 🌿 groCultural
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+¡Bienvenido a **groCultural**! 🇲🇽✨
 
-## About Laravel
+Un proyecto enfocado en documentar, preservar y difundir la riqueza cultural, geográfica y biológica de la región (principalmente del Estado de Guerrero).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## 🚀 Despliegue (Demo)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Puedes visitar y probar la aplicación en producción aquí:
+🔗 **[groCultural en Railway](https://grocultural-backend-production.up.railway.app/)**
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+## 💡 Sobre el Proyecto
 
-## Learning Laravel
+**groCultural** es una aplicación/API desarrollada en **Laravel 10** que sirve como un catálogo y gestor integral de los diferentes aspectos culturales. Entre sus características principales destacan:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+- 🗺️ **Municipios y Regiones:** Información detallada sobre la división política y atributos geográficos.
+- 🐾 **Flora y Fauna:** Catálogo de la biodiversidad silvestre.
+- 🥳 **Tradiciones y Creencias:** Registro de las costumbres locales y religiones prevalentes en cada municipio.
+- 🗣️ **Lenguajes:** Documentación de la diversidad lingüística y lenguas originarias.
+- 📍 **Sitios de Interés:** Puntos turísticos, culturales y arqueológicos.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 📸 Capturas de Pantalla
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+![Captura de pantalla de groCultural](public/images/capturagrocultural.png)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
+---
 
-## Contributing
+## 🛠️ Cómo ejecutar de forma local
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Para poder correr este proyecto en tu propia máquina de manera local, asegúrate de tener **PHP 8.1+**, **Composer** y **Node.js/NPM** instalados. Además, necesitas un servidor para la base de datos (Ej. XAMPP, WAMP, o Docker).
 
-## Security Vulnerabilities
+### Pasos a seguir:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **Clona el repositorio** (si aplica) o abre la carpeta del proyecto.
+   `ash
+   git clone git@github.com:AlinaSM/groCultural.git
+   cd groCultural
+   `
 
-## License
+2. **Instala las dependencias de PHP y Frontend**
+   `ash
+   composer install
+   npm install && npm run dev
+   `
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. **Configura el entorno**
+   - Asegúrate de tener un archivo .env válido. Si no lo tienes, puedes crearlo copiando el de ejemplo:
+   `ash
+   cp .env.example .env
+   `
+   - Abre el archivo .env y ajusta las credenciales de tu conexión a base de datos (por ejemplo, DB_DATABASE=grocultural, DB_USERNAME=root, etc.).
+
+4. **Genera la Application Key** (Si es la primera vez que configuras el .env)
+   `ash
+   php artisan key:generate
+   `
+
+5. **Aplica las Migraciones de la Base de Datos**
+   `ash
+   php artisan migrate --seed
+   `
+   *(El flag --seed insertará información inicial o de prueba, si tienes configurados tus Seeders en DatabaseSeeder.php).*
+
+6. **Inicia el servidor de desarrollo local**
+   `ash
+   php artisan serve
+   `
+   🚀 Por defecto, el proyecto estará disponible en [http://localhost:8000](http://localhost:8000).
+
